@@ -1,0 +1,97 @@
+{
+  "parks": {
+    "disney": {
+      "name": "Walt Disney World",
+      "icon": "🏰",
+      "color": "#5B2C86",
+      "subParks": [
+        { "id": "mk", "name": "Magic Kingdom", "icon": "🏰" },
+        { "id": "epcot", "name": "EPCOT", "icon": "🌐" },
+        { "id": "hs", "name": "Hollywood Studios", "icon": "🎬" },
+        { "id": "ak", "name": "Animal Kingdom", "icon": "🦁" }
+      ],
+      "passTypes": [
+        { "name": "Disney Pixie Dust Pass", "price": 399, "blockouts": "peak" },
+        { "name": "Disney Pirate Pass", "price": 749, "blockouts": "some" },
+        { "name": "Disney Sorcerer Pass", "price": 969, "blockouts": "minimal" },
+        { "name": "Disney Incredi-Pass", "price": 1449, "blockouts": "none" }
+      ],
+      "perks": [
+        "30-min Early Entry",
+        "Extended Evening Hours (Deluxe)",
+        "Free parking (some passes)",
+        "Merchandise discounts 10-20%",
+        "Dining discounts 10-20%"
+      ]
+    },
+    "universal": {
+      "name": "Universal Orlando Resort",
+      "icon": "🎢",
+      "color": "#0033A0",
+      "subParks": [
+        { "id": "usf", "name": "Universal Studios Florida", "icon": "🎬" },
+        { "id": "ioa", "name": "Islands of Adventure", "icon": "🦖" },
+        { "id": "vb", "name": "Volcano Bay", "icon": "🌋" },
+        { "id": "eu", "name": "Epic Universe", "icon": "✨" }
+      ],
+      "passTypes": [
+        { "name": "Seasonal Pass", "price": 374, "blockouts": "peak" },
+        { "name": "Power Pass", "price": 439, "blockouts": "some" },
+        { "name": "Preferred Pass", "price": 549, "blockouts": "minimal" },
+        { "name": "Premier Pass", "price": 789, "blockouts": "none" }
+      ],
+      "perks": [
+        "Early Park Admission",
+        "Up to 40% off hotels",
+        "Free parking (Premier/Preferred)",
+        "10-15% merchandise discount",
+        "10-15% dining discount",
+        "Free Express after 4pm (Premier)"
+      ]
+    },
+    "seaworld": {
+      "name": "SeaWorld Parks",
+      "icon": "🐋",
+      "color": "#0077B6",
+      "subParks": [
+        { "id": "sw", "name": "SeaWorld Orlando", "icon": "🐋" },
+        { "id": "aq", "name": "Aquatica", "icon": "🌊" },
+        { "id": "dc", "name": "Discovery Cove", "icon": "🐬" },
+        { "id": "bg", "name": "Busch Gardens Tampa", "icon": "🎢" }
+      ],
+      "passTypes": [
+        { "name": "Bronze Pass", "price": 189, "blockouts": "peak" },
+        { "name": "Silver Pass", "price": 249, "blockouts": "some" },
+        { "name": "Gold Pass", "price": 299, "blockouts": "minimal" },
+        { "name": "Platinum Pass", "price": 449, "blockouts": "none" }
+      ],
+      "perks": [
+        "Free parking",
+        "Up to 50% off in-park purchases",
+        "Free guest tickets",
+        "Quick Queue (Gold/Platinum)",
+        "Pass Member Lounge access",
+        "Hotel discounts"
+      ]
+    },
+    "legoland": {
+      "name": "LEGOLAND Florida",
+      "icon": "🧱",
+      "color": "#FFD700",
+      "subParks": [
+        { "id": "ll", "name": "LEGOLAND Theme Park", "icon": "🧱" },
+        { "id": "llw", "name": "LEGOLAND Water Park", "icon": "💦" }
+      ],
+      "passTypes": [
+        { "name": "Annual Pass", "price": 199, "blockouts": "some" },
+        { "name": "Premium Pass", "price": 249, "blockouts": "none" }
+      ],
+      "perks": [
+        "Free parking",
+        "10-20% discounts",
+        "Exclusive events",
+        "Birthday rewards"
+      ]
+    }
+  }
+}

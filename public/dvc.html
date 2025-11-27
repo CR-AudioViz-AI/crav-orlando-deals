@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVC Rental Calculator - Save 30-60% on Disney Deluxe Resorts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { 'dvc': '#10B981', 'disney': '#5B2C86' } } }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3">
+                    <span class="text-2xl">🏰🎢🐋</span>
+                    <span class="font-bold text-xl text-gray-900">Orlando Vacation Deals</span>
+                </a>
+                <a href="/" class="text-disney hover:underline">← Back to Search</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-dvc to-green-600 text-white py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <span class="text-4xl">💎</span>
+                <h1 class="text-4xl font-bold">DVC Rental Savings Calculator</h1>
+            </div>
+            <p class="text-xl text-white/90 mb-4">
+                Stay at Disney's BEST resorts for 30-60% less by renting DVC points
+            </p>
+            <p class="text-white/80">
+                Disney Vacation Club owners rent their unused points. You get deluxe accommodations at moderate prices!
+            </p>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Calculator Form -->
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Calculate Your Savings</h2>
+                
+                <div class="space-y-6">
+                    <!-- Resort Selection -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">DVC Resort</label>
+                        <select id="resort" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-dvc focus:ring-0 text-lg" onchange="calculate()">
+                            <option value="grand-floridian">Disney's Grand Floridian Resort & Spa</option>
+                            <option value="polynesian">Disney's Polynesian Village Resort</option>
+                            <option value="beach-club">Disney's Beach Club Villas</option>
+                            <option value="boardwalk">Disney's BoardWalk Villas</option>
+                            <option value="riviera">Disney's Riviera Resort</option>
+                            <option value="animal-kingdom">Disney's Animal Kingdom Villas</option>
+                            <option value="wilderness-lodge">Disney's Wilderness Lodge</option>
+                            <option value="saratoga-springs">Disney's Saratoga Springs Resort</option>
+                            <option value="old-key-west">Disney's Old Key West Resort</option>
+                        </select>
+                    </div>
+
+                    <!-- Room Type -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Room Type</label>
+                        <select id="roomType" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-dvc focus:ring-0" onchange="calculate()">
+                            <option value="studio">Deluxe Studio (sleeps 4-5)</option>
+                            <option value="1br">1-Bedroom Villa (sleeps 4-5)</option>
+                            <option value="2br">2-Bedroom Villa (sleeps 8-9)</option>
+                        </select>
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Check-In</label>
+                            <input type="date" id="checkin" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-dvc focus:ring-0" onchange="calculate()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Check-Out</label>
+                            <input type="date" id="checkout" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-dvc focus:ring-0" onchange="calculate()">
+                        </div>
+                    </div>
+
+                    <!-- Rental Rate -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            DVC Rental Rate ($/point)
+                            <span class="font-normal text-gray-500">- Current market: $19-$23</span>
+                        </label>
+                        <input type="number" id="rentalRate" value="21" min="15" max="30" step="0.5" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-dvc focus:ring-0" onchange="calculate()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div>
+                <div class="bg-white rounded-2xl shadow-lg p-8 mb-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Your Savings Breakdown</h3>
+                    
+                    <div id="resultsContent">
+                        <div class="text-center text-gray-500 py-12">
+                            <i class="fas fa-calculator text-4xl mb-4"></i>
+                            <p>Select your dates to see savings</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Book Now Links -->
+                <div class="bg-gradient-to-br from-dvc/10 to-green-50 rounded-2xl p-6 border border-dvc/30">
+                    <h4 class="font-bold text-gray-900 mb-4">🔗 Book Your DVC Rental</h4>
+                    <div class="space-y-3">
+                        <a href="https://www.dvcrentalstore.com/listings/" target="_blank" class="flex items-center justify-between bg-white rounded-lg p-4 hover:shadow-md transition">
+                            <div>
+                                <div class="font-semibold text-gray-900">DVC Rental Store</div>
+                                <div class="text-sm text-gray-500">~$21/point • Confirmed reservations</div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-dvc"></i>
+                        </a>
+                        <a href="https://www.dvcrequest.com/confirmed-reservations.asp" target="_blank" class="flex items-center justify-between bg-white rounded-lg p-4 hover:shadow-md transition">
+                            <div>
+                                <div class="font-semibold text-gray-900">David's Vacation Club Rentals</div>
+                                <div class="text-sm text-gray-500">~$21/point • Most established broker</div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-dvc"></i>
+                        </a>
+                        <a href="https://www.dvcshop.com/rent/" target="_blank" class="flex items-center justify-between bg-white rounded-lg p-4 hover:shadow-md transition">
+                            <div>
+                                <div class="font-semibold text-gray-900">DVC Shop</div>
+                                <div class="text-sm text-gray-500">~$19.50/point • Lower rates available</div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-dvc"></i>
+                        </a>
+                        <a href="https://www.mousehousemagic.com/rentals/" target="_blank" class="flex items-center justify-between bg-white rounded-lg p-4 hover:shadow-md transition">
+                            <div>
+                                <div class="font-semibold text-gray-900">MouseHouseMagic Aggregator</div>
+                                <div class="text-sm text-gray-500">Compare ALL confirmed rentals in one place</div>
+                            </div>
+                            <i class="fas fa-external-link-alt text-dvc"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- What You Get -->
+        <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">What You Get with DVC Rentals</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center p-6 bg-purple-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🌅</span>
+                    <h4 class="font-bold text-gray-900 mb-2">30-Min Early Entry</h4>
+                    <p class="text-sm text-gray-600">Access parks before regular guests - beat the crowds!</p>
+                </div>
+                <div class="text-center p-6 bg-purple-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🌙</span>
+                    <h4 class="font-bold text-gray-900 mb-2">Extended Evening Hours</h4>
+                    <p class="text-sm text-gray-600">Extra 2 hours at Magic Kingdom & EPCOT (Deluxe resort perk)</p>
+                </div>
+                <div class="text-center p-6 bg-purple-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🅿️</span>
+                    <h4 class="font-bold text-gray-900 mb-2">Free Theme Park Parking</h4>
+                    <p class="text-sm text-gray-600">Save $30/day at all 4 Disney theme parks</p>
+                </div>
+                <div class="text-center p-6 bg-green-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🍽️</span>
+                    <h4 class="font-bold text-gray-900 mb-2">In-Room Kitchen</h4>
+                    <p class="text-sm text-gray-600">Studios have kitchenettes; Villas have full kitchens</p>
+                </div>
+                <div class="text-center p-6 bg-green-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🛏️</span>
+                    <h4 class="font-bold text-gray-900 mb-2">More Space</h4>
+                    <p class="text-sm text-gray-600">Studios: 350+ sq ft. 2BR Villas: 1,000+ sq ft</p>
+                </div>
+                <div class="text-center p-6 bg-green-50 rounded-xl">
+                    <span class="text-4xl mb-3 block">🎁</span>
+                    <h4 class="font-bold text-gray-900 mb-2">Same Great Service</h4>
+                    <p class="text-sm text-gray-600">All Disney resort amenities, pools, and dining</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h3>
+            <div class="space-y-4">
+                <details class="border rounded-lg p-4">
+                    <summary class="font-semibold cursor-pointer">Is DVC rental legal and safe?</summary>
+                    <p class="mt-2 text-gray-600">Yes! DVC owners are allowed to rent their points. Established brokers like David's and DVC Rental Store have facilitated thousands of rentals. They provide insurance and guarantees.</p>
+                </details>
+                <details class="border rounded-lg p-4">
+                    <summary class="font-semibold cursor-pointer">What's the catch?</summary>
+                    <p class="mt-2 text-gray-600">DVC rentals are typically non-refundable and non-changeable. You need to commit to your dates. Book through a reputable broker with good reviews.</p>
+                </details>
+                <details class="border rounded-lg p-4">
+                    <summary class="font-semibold cursor-pointer">How far in advance should I book?</summary>
+                    <p class="mt-2 text-gray-600">Popular dates (holidays, spring break) should be booked 7-11 months ahead. Off-season dates may be available 2-3 months out. "Confirmed" rentals are already booked and available immediately.</p>
+                </details>
+                <details class="border rounded-lg p-4">
+                    <summary class="font-semibold cursor-pointer">Do I get the same room as if I booked direct?</summary>
+                    <p class="mt-2 text-gray-600">Yes! Same rooms, same amenities, same check-in process. You'll check in as a DVC guest and get all resort benefits including Early Entry and Extended Evening Hours.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DVC Point Charts (Official Disney Data)
+        const DVC_POINTS = {
+            'grand-floridian': {
+                name: "Disney's Grand Floridian Resort & Spa",
+                directPrice: 789,
+                studio: { adventure: 20, choice: 25, peak: 31, premier: 38 },
+                '1br': { adventure: 36, choice: 45, peak: 56, premier: 68 },
+                '2br': { adventure: 54, choice: 67, peak: 84, premier: 102 }
+            },
+            'polynesian': {
+                name: "Disney's Polynesian Village Resort",
+                directPrice: 685,
+                studio: { adventure: 19, choice: 24, peak: 29, premier: 35 },
+                '1br': { adventure: 34, choice: 42, peak: 52, premier: 63 },
+                '2br': { adventure: 51, choice: 64, peak: 80, premier: 97 }
+            },
+            'beach-club': {
+                name: "Disney's Beach Club Villas",
+                directPrice: 625,
+                studio: { adventure: 16, choice: 20, peak: 25, premier: 32 },
+                '1br': { adventure: 30, choice: 38, peak: 47, premier: 57 },
+                '2br': { adventure: 46, choice: 58, peak: 72, premier: 87 }
+            },
+            'boardwalk': {
+                name: "Disney's BoardWalk Villas",
+                directPrice: 565,
+                studio: { adventure: 14, choice: 18, peak: 22, premier: 28 },
+                '1br': { adventure: 27, choice: 34, peak: 42, premier: 51 },
+                '2br': { adventure: 41, choice: 51, peak: 64, premier: 77 }
+            },
+            'riviera': {
+                name: "Disney's Riviera Resort",
+                directPrice: 550,
+                studio: { adventure: 13, choice: 17, peak: 21, premier: 25 },
+                '1br': { adventure: 24, choice: 30, peak: 37, premier: 45 },
+                '2br': { adventure: 37, choice: 46, peak: 58, premier: 70 }
+            },
+            'animal-kingdom': {
+                name: "Disney's Animal Kingdom Villas",
+                directPrice: 534,
+                studio: { adventure: 14, choice: 18, peak: 22, premier: 28 },
+                '1br': { adventure: 25, choice: 31, peak: 39, premier: 47 },
+                '2br': { adventure: 39, choice: 49, peak: 61, premier: 74 }
+            },
+            'wilderness-lodge': {
+                name: "Disney's Wilderness Lodge",
+                directPrice: 479,
+                studio: { adventure: 12, choice: 15, peak: 19, premier: 24 },
+                '1br': { adventure: 22, choice: 28, peak: 35, premier: 42 },
+                '2br': { adventure: 35, choice: 44, peak: 55, premier: 66 }
+            },
+            'saratoga-springs': {
+                name: "Disney's Saratoga Springs Resort",
+                directPrice: 425,
+                studio: { adventure: 10, choice: 12, peak: 16, premier: 20 },
+                '1br': { adventure: 18, choice: 22, peak: 28, premier: 34 },
+                '2br': { adventure: 28, choice: 35, peak: 44, premier: 53 }
+            },
+            'old-key-west': {
+                name: "Disney's Old Key West Resort",
+                directPrice: 399,
+                studio: { adventure: 10, choice: 12, peak: 16, premier: 20 },
+                '1br': { adventure: 18, choice: 22, peak: 28, premier: 34 },
+                '2br': { adventure: 28, choice: 35, peak: 44, premier: 53 }
+            }
+        };
+
+        // Set default dates
+        const today = new Date();
+        const checkinDate = new Date(today);
+        checkinDate.setDate(today.getDate() + 90);
+        const checkoutDate = new Date(checkinDate);
+        checkoutDate.setDate(checkinDate.getDate() + 5);
+        
+        document.getElementById('checkin').valueAsDate = checkinDate;
+        document.getElementById('checkout').valueAsDate = checkoutDate;
+
+        function getSeason(date) {
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            
+            if ((month === 12 && day >= 20) || (month === 1 && day <= 3) || month === 7) return 'premier';
+            if (month === 3 || month === 4 || month === 6 || month === 8 || month === 12) return 'peak';
+            if (month === 2 || month === 5 || month === 10 || month === 11) return 'choice';
+            return 'adventure';
+        }
+
+        function calculate() {
+            const resort = document.getElementById('resort').value;
+            const roomType = document.getElementById('roomType').value;
+            const checkin = new Date(document.getElementById('checkin').value);
+            const checkout = new Date(document.getElementById('checkout').value);
+            const rentalRate = parseFloat(document.getElementById('rentalRate').value) || 21;
+
+            if (isNaN(checkin.getTime()) || isNaN(checkout.getTime())) {
+                return;
+            }
+
+            const nights = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
+            if (nights <= 0) return;
+
+            const resortData = DVC_POINTS[resort];
+            const roomData = resortData[roomType];
+
+            // Calculate points per night based on season
+            let totalPoints = 0;
+            let seasonBreakdown = { adventure: 0, choice: 0, peak: 0, premier: 0 };
+            let currentDate = new Date(checkin);
+
+            for (let i = 0; i < nights; i++) {
+                const season = getSeason(currentDate);
+                const pointsThisNight = roomData[season];
+                totalPoints += pointsThisNight;
+                seasonBreakdown[season]++;
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            const dvcCost = totalPoints * rentalRate;
+            const directCost = resortData.directPrice * nights;
+            const savings = directCost - dvcCost;
+            const savingsPercent = Math.round((savings / directCost) * 100);
+
+            // Update results
+            document.getElementById('resultsContent').innerHTML = `
+                <div class="space-y-6">
+                    <div class="text-center pb-6 border-b">
+                        <div class="text-gray-500 mb-1">${resortData.name}</div>
+                        <div class="text-3xl font-bold text-gray-900">${nights} Nights</div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-100 rounded-lg p-4">
+                            <div class="text-gray-500 text-sm">Disney Direct Price</div>
+                            <div class="text-2xl font-bold text-gray-400 line-through">$${directCost.toLocaleString()}</div>
+                            <div class="text-sm text-gray-500">$${resortData.directPrice}/night</div>
+                        </div>
+                        <div class="bg-dvc/10 rounded-lg p-4 border-2 border-dvc">
+                            <div class="text-dvc text-sm font-semibold">DVC Rental Price</div>
+                            <div class="text-2xl font-bold text-dvc">$${dvcCost.toLocaleString()}</div>
+                            <div class="text-sm text-gray-600">$${Math.round(dvcCost/nights)}/night</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-500 text-white rounded-xl p-6 text-center">
+                        <div class="text-lg">YOU SAVE</div>
+                        <div class="text-4xl font-bold">$${savings.toLocaleString()}</div>
+                        <div class="text-xl">(${savingsPercent}% off!)</div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-sm font-semibold text-gray-700 mb-2">Points Breakdown</div>
+                        <div class="flex justify-between mb-2">
+                            <span>Total DVC Points Needed:</span>
+                            <span class="font-bold">${totalPoints} points</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <span>@ $${rentalRate}/point =</span>
+                            <span>${totalPoints} × $${rentalRate} = $${dvcCost}</span>
+                        </div>
+                        ${Object.entries(seasonBreakdown).filter(([_, n]) => n > 0).map(([season, nights]) => `
+                            <div class="text-xs text-gray-500 mt-1">
+                                ${season.charAt(0).toUpperCase() + season.slice(1)} Season: ${nights} night${nights > 1 ? 's' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>

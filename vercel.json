@@ -17,6 +17,8 @@
     { "source": "/deals", "destination": "/public/deals.html" },
     { "source": "/results", "destination": "/public/results.html" },
     { "source": "/hotels", "destination": "/public/results.html" },
+    { "source": "/passholder", "destination": "/public/passholder.html" },
+    { "source": "/passholder/:path*", "destination": "/public/passholder.html" },
     { "source": "/:path*", "destination": "/public/:path*" }
   ],
   "headers": [

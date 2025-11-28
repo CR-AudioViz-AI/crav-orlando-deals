@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Orlando Deals - Disney, Universal, SeaWorld Promotions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3">
+                    <span class="text-2xl">🏰🎢🐋</span>
+                    <span class="font-bold text-xl text-gray-900">Orlando Vacation Deals</span>
+                </a>
+                <div class="flex items-center gap-6">
+                    <a href="/" class="text-gray-600 hover:text-purple-700">Trip Builder</a>
+                    <a href="/results" class="text-gray-600 hover:text-purple-700">Hotels</a>
+                    <a href="/dvc" class="text-gray-600 hover:text-purple-700">DVC Calculator</a>
+                    <a href="/passholder" class="text-gray-600 hover:text-purple-700">Passholder Hub</a>
+                    <span class="text-purple-700 font-semibold">Current Deals</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-r from-red-600 to-orange-500 text-white py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <span class="text-4xl">🔥</span>
+                <h1 class="text-4xl font-bold">Current Orlando Deals</h1>
+            </div>
+            <p class="text-xl text-white/90">
+                Real promotions from Disney, Universal, SeaWorld & more
+            </p>
+            <p class="text-white/70 mt-2 text-sm">
+                Last updated: November 27, 2025
+            </p>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto px-4 py-12">
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8 justify-center">
+            <button onclick="filterDeals('all')" class="filter-btn active bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-medium">
+                All Deals
+            </button>
+            <button onclick="filterDeals('disney')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300">
+                🏰 Disney
+            </button>
+            <button onclick="filterDeals('universal')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300">
+                🎢 Universal
+            </button>
+            <button onclick="filterDeals('seaworld')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300">
+                🐋 SeaWorld
+            </button>
+            <button onclick="filterDeals('hotels')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300">
+                🏨 Hotels
+            </button>
+            <button onclick="filterDeals('tickets')" class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-300">
+                🎫 Tickets
+            </button>
+        </div>
+
+        <!-- HOT DEAL Banner -->
+        <div class="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-2xl p-6 mb-8">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">⚡ BLACK FRIDAY</span>
+                    <h2 class="text-2xl font-bold mt-2">SeaWorld Fun Card: Just $49.99!</h2>
+                    <p class="text-white/90">Unlimited visits to SeaWorld & Aquatica through end of 2025</p>
+                </div>
+                <a href="https://seaworld.com/orlando/tickets/" target="_blank" class="bg-white text-green-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100">
+                    Get This Deal →
+                </a>
+            </div>
+        </div>
+
+        <!-- Deals Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="dealsGrid">
+            
+            <!-- Disney Deals -->
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="disney hotels">
+                <div class="bg-purple-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🏰 Disney Resort</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">SAVE 25%</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Save Up to 25% on Select Disney Resort Hotels</h3>
+                    <p class="text-gray-600 text-sm mb-4">Valid for stays most nights January 4 through April 30, 2026. Discount varies by resort category.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Book by: Mar 31, 2026</span>
+                        <a href="https://disneyworld.disney.go.com/special-offers/" target="_blank" class="text-purple-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="disney tickets">
+                <div class="bg-purple-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🏰 Disney Tickets</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">FLORIDA RESIDENT</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Florida Resident 4-Day Ticket: $79/day</h3>
+                    <p class="text-gray-600 text-sm mb-4">4-Day ticket for $319 total ($79.75/day). Valid for Florida residents with ID required at gate.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Limited Time</span>
+                        <a href="https://disneyworld.disney.go.com/tickets/" target="_blank" class="text-purple-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="disney">
+                <div class="bg-purple-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🏰 Disney Dining</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">FREE DINING</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Free Dining Plan Available</h3>
+                    <p class="text-gray-600 text-sm mb-4">Select dates in early 2026 include free Quick Service Dining Plan when you stay at a Disney Resort.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Select Dates</span>
+                        <a href="https://disneyworld.disney.go.com/special-offers/" target="_blank" class="text-purple-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universal Deals -->
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="universal hotels">
+                <div class="bg-blue-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🎢 Universal Hotels</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">SAVE 40%</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Annual Passholder: Up to 40% Off Hotels</h3>
+                    <p class="text-gray-600 text-sm mb-4">All Universal passholders save 10-40% on resort hotels. Includes Early Park Admission to Epic Universe!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Ongoing 2025</span>
+                        <a href="https://www.universalorlando.com/web/en/us/places-to-stay" target="_blank" class="text-blue-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="universal tickets">
+                <div class="bg-blue-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🎢 Universal Tickets</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">EPIC UNIVERSE</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Epic Universe: Buy 3 Days, Get 2 FREE</h3>
+                    <p class="text-gray-600 text-sm mb-4">5-day tickets for the price of 3! Includes all 4 Universal parks including the brand new Epic Universe.</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Limited Time</span>
+                        <a href="https://www.universalorlando.com/web/en/us/tickets-packages/tickets" target="_blank" class="text-blue-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="universal">
+                <div class="bg-blue-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🎢 Universal Pass</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">FREE EXPRESS</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Premier Pass: Free Express After 4pm</h3>
+                    <p class="text-gray-600 text-sm mb-4">Premier Annual Passholders get complimentary Express Pass after 4pm daily at all parks!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Passholder Perk</span>
+                        <a href="https://www.universalorlando.com/web/en/us/tickets-packages/annual-passes" target="_blank" class="text-blue-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SeaWorld Deals -->
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="seaworld tickets">
+                <div class="bg-cyan-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🐋 SeaWorld</span>
+                    <span class="text-xs bg-yellow-400 text-yellow-900 px-2 py-1 rounded">BLACK FRIDAY</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Fun Card: $49.99 (Reg $119)</h3>
+                    <p class="text-gray-600 text-sm mb-4">Unlimited visits to SeaWorld Orlando AND Aquatica through December 31, 2025!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Limited Time</span>
+                        <a href="https://seaworld.com/orlando/tickets/" target="_blank" class="text-cyan-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="seaworld">
+                <div class="bg-cyan-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🐋 SeaWorld Pass</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">50% OFF</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Annual Pass: Up to 50% Off In-Park</h3>
+                    <p class="text-gray-600 text-sm mb-4">Pass members get up to 50% off food, merchandise, and experiences. Plus FREE parking!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Member Benefit</span>
+                        <a href="https://seaworld.com/orlando/annual-pass/" target="_blank" class="text-cyan-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="seaworld">
+                <div class="bg-cyan-700 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🐋 Military</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">FREE ADMISSION</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Waves of Honor: FREE for Military</h3>
+                    <p class="text-gray-600 text-sm mb-4">Active/retired military + 3 dependents get FREE admission to SeaWorld, Busch Gardens & Sesame Place!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Register at wavesofhonor.com</span>
+                        <a href="https://wavesofhonor.com" target="_blank" class="text-cyan-700 font-semibold hover:underline">View Deal →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DVC Deals -->
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="disney hotels">
+                <div class="bg-green-600 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">💎 DVC Rentals</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">SAVE 44%</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Grand Floridian for $441/night</h3>
+                    <p class="text-gray-600 text-sm mb-4">Rent DVC points and stay at Disney's best resorts for 30-60% less than booking direct!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Always Available</span>
+                        <a href="/dvc" class="text-green-600 font-semibold hover:underline">Calculate Savings →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Good Neighbor Deals -->
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="hotels">
+                <div class="bg-orange-500 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">⭐ Good Neighbor</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">EARLY ENTRY</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Good Neighbor Hotels from $129/night</h3>
+                    <p class="text-gray-600 text-sm mb-4">30-min Disney Early Entry included at select Good Neighbor hotels near Disney Springs!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Year Round</span>
+                        <a href="https://www.booking.com/searchresults.html?dest_id=20023181" target="_blank" class="text-orange-600 font-semibold hover:underline">View Hotels →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deal-card bg-white rounded-xl shadow-sm overflow-hidden" data-category="hotels">
+                <div class="bg-orange-500 text-white px-4 py-2 flex items-center justify-between">
+                    <span class="font-semibold">🏨 Budget Pick</span>
+                    <span class="text-xs bg-white/20 px-2 py-1 rounded">FREE FOOD</span>
+                </div>
+                <div class="p-6">
+                    <h3 class="font-bold text-lg text-gray-900 mb-2">Drury Inn: Free Breakfast + Dinner</h3>
+                    <p class="text-gray-600 text-sm mb-4">Free hot breakfast, free evening food & drinks (incl. alcohol), free parking. From $159/night!</p>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="text-gray-500">Year Round</span>
+                        <a href="https://www.druryhotels.com/locations/orlando-fl" target="_blank" class="text-orange-600 font-semibold hover:underline">Book Direct →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Deals Section -->
+        <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">🔗 Deal Finder Resources</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://www.mousesavers.com" target="_blank" class="bg-purple-50 rounded-xl p-6 hover:bg-purple-100 transition">
+                    <h4 class="font-bold text-gray-900 mb-2">MouseSavers</h4>
+                    <p class="text-sm text-gray-600">The most comprehensive Disney discount site. Updated daily with current promotions.</p>
+                </a>
+                <a href="https://www.undercovertourist.com" target="_blank" class="bg-blue-50 rounded-xl p-6 hover:bg-blue-100 transition">
+                    <h4 class="font-bold text-gray-900 mb-2">Undercover Tourist</h4>
+                    <p class="text-sm text-gray-600">Authorized ticket reseller with discounts on all Orlando parks. Free perks included.</p>
+                </a>
+                <a href="https://orlandoinformer.com/deals/" target="_blank" class="bg-cyan-50 rounded-xl p-6 hover:bg-cyan-100 transition">
+                    <h4 class="font-bold text-gray-900 mb-2">Orlando Informer</h4>
+                    <p class="text-sm text-gray-600">Universal Orlando experts with exclusive discount codes and insider tips.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterDeals(category) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-gray-900', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            event.target.classList.add('active', 'bg-gray-900', 'text-white');
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+            // Filter cards
+            document.querySelectorAll('.deal-card').forEach(card => {
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

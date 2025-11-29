@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney World Date Calculator - When to Book Dining & Lightning Lane</title>
+    <meta name="description" content="Know exactly when to book Disney dining reservations, Lightning Lane, and hotel reservations based on your arrival date.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'crav': '#6366F1' }}}}</script>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-red-600">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-red-500 to-rose-600 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">Disney World Date Calculator</h1>
+            <p class="text-white/90">Never miss a booking window - enter your arrival date</p>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+                <h3 class="font-bold text-lg mb-4">Enter Your Trip Details</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Check-In Date</label>
+                        <input type="date" id="checkinDate" class="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:border-disney" onchange="calculateDates()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Check-Out Date</label>
+                        <input type="date" id="checkoutDate" class="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:border-disney" onchange="calculateDates()">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Staying At</label>
+                        <select id="hotelType" class="w-full border-2 border-gray-200 rounded-lg px-4 py-2 focus:border-disney" onchange="calculateDates()">
+                            <option value="disney">Disney Resort Hotel</option>
+                            <option value="offsite">Off-Site / Non-Disney</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dateResults" class="space-y-6">
+                <!-- Results will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- What Each Window Means -->
+    <section class="py-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">📅 Understanding Booking Windows</h2>
+            <div class="space-y-6">
+                <div class="bg-purple-50 rounded-xl p-6">
+                    <h3 class="font-bold text-purple-800 mb-2">🍽️ Dining Reservations (ADR)</h3>
+                    <p class="text-sm text-purple-900 mb-2"><strong>When:</strong> 60 days before check-in (Disney resort guests can book entire stay)</p>
+                    <p class="text-sm text-gray-600">Book at exactly 6:00 AM ET. Popular restaurants like Be Our Guest, Space 220, and character dining fill up within minutes!</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-6">
+                    <h3 class="font-bold text-blue-800 mb-2">⚡ Lightning Lane Multi Pass</h3>
+                    <p class="text-sm text-blue-900 mb-2"><strong>When:</strong> 7 days before (Disney resort) or 3 days before (others)</p>
+                    <p class="text-sm text-gray-600">Book at 7:00 AM ET. Prioritize: Tron, Guardians, Flight of Passage, Rise of the Resistance, Test Track</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6">
+                    <h3 class="font-bold text-green-800 mb-2">🎟️ Individual Lightning Lane (Single)</h3>
+                    <p class="text-sm text-green-900 mb-2"><strong>When:</strong> 7:00 AM day of visit (Disney resort) or at park open (others)</p>
+                    <p class="text-sm text-gray-600">$15-25 per ride. Best for: Tron, Guardians of the Galaxy, Flight of Passage</p>
+                </div>
+                <div class="bg-yellow-50 rounded-xl p-6">
+                    <h3 class="font-bold text-yellow-800 mb-2">🏨 Disney Resort Booking</h3>
+                    <p class="text-sm text-yellow-900 mb-2"><strong>When:</strong> 499 days in advance</p>
+                    <p class="text-sm text-gray-600">For peak times (Christmas, Spring Break), book as early as possible for best room selection</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="py-8 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-xl font-bold mb-4">💡 Pro Tips for Booking Success</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4">
+                    <h4 class="font-bold text-sm mb-2">For Dining</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li>• Be logged in to My Disney Experience at 5:55 AM ET</li>
+                        <li>• Have backup choices ready</li>
+                        <li>• Check daily for cancellations</li>
+                        <li>• Use MouseDining.com for alerts</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg p-4">
+                    <h4 class="font-bold text-sm mb-2">For Lightning Lane</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li>• Book most popular rides first</li>
+                        <li>• Stack afternoon/evening times</li>
+                        <li>• Rope drop for rides you can't get LL</li>
+                        <li>• Check for drops throughout the day</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+            <p class="text-gray-500 text-xs mt-2">Booking windows accurate as of November 2025. Disney may change policies.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set default dates (60 days from now)
+        const today = new Date();
+        const checkin = new Date(today);
+        checkin.setDate(today.getDate() + 60);
+        const checkout = new Date(checkin);
+        checkout.setDate(checkin.getDate() + 7);
+        
+        document.getElementById('checkinDate').valueAsDate = checkin;
+        document.getElementById('checkoutDate').valueAsDate = checkout;
+
+        function calculateDates() {
+            const checkinStr = document.getElementById('checkinDate').value;
+            const checkoutStr = document.getElementById('checkoutDate').value;
+            const isDisneyResort = document.getElementById('hotelType').value === 'disney';
+            
+            if (!checkinStr) return;
+            
+            const checkin = new Date(checkinStr + 'T00:00:00');
+            const checkout = checkoutStr ? new Date(checkoutStr + 'T00:00:00') : new Date(checkin.getTime() + 7 * 24 * 60 * 60 * 1000);
+            const tripLength = Math.round((checkout - checkin) / (1000 * 60 * 60 * 24));
+            
+            // Calculate important dates
+            const diningDate = new Date(checkin);
+            diningDate.setDate(checkin.getDate() - 60);
+            
+            const llDateDisney = new Date(checkin);
+            llDateDisney.setDate(checkin.getDate() - 7);
+            
+            const llDateOffsite = new Date(checkin);
+            llDateOffsite.setDate(checkin.getDate() - 3);
+            
+            const hotelBookDate = new Date(checkin);
+            hotelBookDate.setDate(checkin.getDate() - 499);
+            
+            const formatDate = (date) => date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const isPast = (date) => date < today;
+            
+            let html = `
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="font-bold text-xl mb-4">Your Trip: ${formatDate(checkin)} to ${formatDate(checkout)}</h3>
+                    <p class="text-gray-600 mb-4">${tripLength} nights • ${isDisneyResort ? 'Disney Resort Guest' : 'Off-Site Guest'}</p>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-lg ${isPast(diningDate) ? 'bg-red-50 border-l-4 border-red-500' : 'bg-purple-50 border-l-4 border-purple-500'}">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-purple-800">🍽️ Dining Reservations</h4>
+                                    <p class="text-sm text-gray-600">60 days before check-in</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold ${isPast(diningDate) ? 'text-red-600' : 'text-purple-600'}">${formatDate(diningDate)}</div>
+                                    <div class="text-xs text-gray-500">Book at 6:00 AM ET</div>
+                                    ${isPast(diningDate) ? '<span class="text-xs text-red-600 font-medium">⚠️ Window has passed</span>' : ''}
+                                </div>
+                            </div>
+                            ${isDisneyResort ? '<p class="text-xs text-green-600 mt-2">✓ As a Disney resort guest, you can book dining for your entire stay on this date!</p>' : ''}
+                        </div>
+                        
+                        <div class="p-4 rounded-lg ${isPast(isDisneyResort ? llDateDisney : llDateOffsite) ? 'bg-red-50 border-l-4 border-red-500' : 'bg-blue-50 border-l-4 border-blue-500'}">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-blue-800">⚡ Lightning Lane Multi Pass</h4>
+                                    <p class="text-sm text-gray-600">${isDisneyResort ? '7 days before' : '3 days before'} (${isDisneyResort ? 'Disney resort' : 'off-site'} guest)</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold ${isPast(isDisneyResort ? llDateDisney : llDateOffsite) ? 'text-red-600' : 'text-blue-600'}">${formatDate(isDisneyResort ? llDateDisney : llDateOffsite)}</div>
+                                    <div class="text-xs text-gray-500">Book at 7:00 AM ET</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg bg-green-50 border-l-4 border-green-500">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-green-800">🎟️ Individual Lightning Lane</h4>
+                                    <p class="text-sm text-gray-600">Day of visit</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold text-green-600">${isDisneyResort ? '7:00 AM ET' : 'At Park Open'}</div>
+                                    <div class="text-xs text-gray-500">Each day of your trip</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 rounded-lg bg-yellow-50 border-l-4 border-yellow-500">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-yellow-800">🏨 Hotel Booking Window</h4>
+                                    <p class="text-sm text-gray-600">499 days in advance</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold text-yellow-600">${formatDate(hotelBookDate)}</div>
+                                    <div class="text-xs text-gray-500">${isPast(hotelBookDate) ? 'Bookable now!' : 'Opens on this date'}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-disney to-universal text-white rounded-xl p-6 text-center">
+                    <h3 class="font-bold text-lg mb-2">📱 Set Calendar Reminders!</h3>
+                    <p class="text-white/80 text-sm">Add these dates to your phone calendar with 15-minute early alerts so you don't miss your booking windows.</p>
+                </div>
+            `;
+            
+            document.getElementById('dateResults').innerHTML = html;
+        }
+        
+        calculateDates();
+    </script>
+</body>
+</html>

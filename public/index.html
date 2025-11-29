@@ -34,6 +34,7 @@
         @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .pulse { animation: pulse 2s infinite; }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .loading { opacity: 0.7; pointer-events: none; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -253,46 +254,14 @@
                         </select>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-3 gap-6 mb-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Budget/Night</label>
-                        <select id="budget" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-disney">
-                            <option value="150">Under $150</option>
-                            <option value="250" selected>$150-$250</option>
-                            <option value="400">$250-$400</option>
-                            <option value="9999">$400+ Deluxe</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Passholder?</label>
-                        <select id="passholder" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-disney">
-                            <option value="none" selected>Not a Passholder</option>
-                            <option value="disney">Disney Annual Pass</option>
-                            <option value="universal">Universal Annual Pass</option>
-                            <option value="seaworld">SeaWorld Pass</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Rooms</label>
-                        <select id="rooms" class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-disney">
-                            <option value="1" selected>1 Room</option>
-                            <option value="2">2 Rooms</option>
-                            <option value="3">3 Rooms</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="flex flex-wrap items-center gap-4 mb-8">
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" id="includeDVC" checked class="rounded text-green-600">
                         <span class="text-sm">💎 Include DVC Rentals (30-60% savings)</span>
                     </label>
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="militaryDiscount" class="rounded text-disney">
-                        <span class="text-sm">🎖️ Military</span>
-                    </label>
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" id="floridaResident" class="rounded text-disney">
-                        <span class="text-sm">🌴 Florida Resident</span>
+                        <input type="checkbox" id="isPassholder" class="rounded text-disney">
+                        <span class="text-sm">🎫 I'm a Passholder</span>
                     </label>
                 </div>
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -351,11 +320,12 @@
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-4">🔔 Never Miss a Deal</h2>
             <p class="text-xl text-white/90 mb-8">Get exclusive Orlando vacation deals delivered to your inbox</p>
-            <form onsubmit="submitEmail(event)" class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                <input type="email" id="emailInput" required placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:outline-none">
-                <button type="submit" class="bg-white text-disney px-8 py-4 rounded-xl font-bold hover:bg-gray-100">Get Alerts</button>
+            <form id="inlineEmailForm" class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                <input type="email" id="inlineEmail" required placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-xl text-gray-900 focus:outline-none">
+                <button type="submit" id="inlineSubmitBtn" class="bg-white text-disney px-8 py-4 rounded-xl font-bold hover:bg-gray-100">Get Alerts</button>
             </form>
             <p class="text-white/60 text-sm mt-4">Join 25,000+ Orlando planners. No spam.</p>
+            <p id="inlineStatus" class="mt-2 hidden"></p>
         </div>
     </section>
 
@@ -421,10 +391,11 @@
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Deal Alerts</h4>
-                    <form onsubmit="submitFooterEmail(event)" class="flex gap-2">
-                        <input type="email" required placeholder="Email" class="flex-1 px-3 py-2 rounded bg-gray-800 border border-gray-700 text-white text-sm">
+                    <form id="footerEmailForm" class="flex gap-2">
+                        <input type="email" id="footerEmail" required placeholder="Email" class="flex-1 px-3 py-2 rounded bg-gray-800 border border-gray-700 text-white text-sm">
                         <button type="submit" class="bg-crav px-4 py-2 rounded text-sm"><i class="fas fa-paper-plane"></i></button>
                     </form>
+                    <p id="footerStatus" class="text-xs mt-2 hidden"></p>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs">
@@ -442,42 +413,107 @@
                 <div class="text-5xl mb-4">🎉</div>
                 <h2 class="text-2xl font-bold text-gray-900 mb-2">Get Exclusive Deals</h2>
                 <p class="text-gray-600 mb-6">Join 25,000+ travelers who get our best deals first!</p>
-                <form onsubmit="submitModalEmail(event)">
-                    <input type="email" required placeholder="Enter your email" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg mb-4 focus:border-disney focus:outline-none">
-                    <button type="submit" class="w-full bg-disney text-white py-3 rounded-lg font-bold hover:bg-purple-800">Send Me Deals →</button>
+                <form id="modalEmailForm">
+                    <input type="email" id="modalEmail" required placeholder="Enter your email" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg mb-4 focus:border-disney focus:outline-none">
+                    <button type="submit" id="modalSubmitBtn" class="w-full bg-disney text-white py-3 rounded-lg font-bold hover:bg-purple-800">Send Me Deals →</button>
                 </form>
+                <p id="modalStatus" class="mt-4 hidden"></p>
             </div>
         </div>
     </div>
 
     <script>
-        // ========== JAVARI AI KNOWLEDGE BASE ==========
-        const KNOWLEDGE = {
-            disneyValue: ["All-Star Movies ($130-180)", "All-Star Music ($130-180)", "All-Star Sports ($130-180)", "Pop Century ($183-250, Skyliner)", "Art of Animation ($200-300, Skyliner)"],
-            disneyModerate: ["Caribbean Beach ($250-350, Skyliner hub)", "Coronado Springs ($260-380)", "Port Orleans Riverside ($260-350)", "Port Orleans French Quarter ($260-340)"],
-            disneyDeluxe: ["Grand Floridian ($700-1200, walk to MK)", "Polynesian ($600-1000, monorail)", "Contemporary ($500-900, walk to MK)", "Yacht Club ($500-850, walk to EPCOT)", "Beach Club ($500-850, walk to EPCOT)", "BoardWalk ($500-800, walk to EPCOT)", "Animal Kingdom Lodge ($450-800)", "Wilderness Lodge ($450-750)", "Riviera ($450-700, Skyliner)"],
-            partnerHotels: ["Swan & Dolphin ($250-500, walk to EPCOT, Marriott points)", "Four Seasons ($800-1500)", "Waldorf Astoria ($400-700)", "Signia Bonnet Creek ($250-450)"],
-            apDiscounts: "APs save up to 30% at most Disney resorts through Dec 2025. Swan/Dolphin also offers 30% AP discount (code: QWH).",
-            walkToParks: {
-                mk: ["Grand Floridian (5 min)", "Contemporary (10 min)"],
-                epcot: ["Beach Club (5 min)", "Yacht Club (7 min)", "BoardWalk (5 min)", "Swan/Dolphin (10 min)"]
-            },
-            dvc: {
-                savings: "30-60%",
-                avgCost: "$18-23 per point",
-                perks: ["Same deluxe rooms", "Early Entry", "Extended Evening Hours", "Free parking"]
+        // ========== API SUBMISSION ==========
+        async function submitToAPI(type, data) {
+            try {
+                const response = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type, data })
+                });
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('API Error:', error);
+                return { success: false, error: error.message };
             }
-        };
+        }
 
-        // ========== CONVERSATION STATE ==========
+        // ========== EMAIL FORMS ==========
+        document.getElementById('inlineEmailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('inlineSubmitBtn');
+            const status = document.getElementById('inlineStatus');
+            const email = document.getElementById('inlineEmail').value;
+            
+            btn.disabled = true;
+            btn.textContent = 'Subscribing...';
+            
+            const result = await submitToAPI('email', { email, source: 'inline' });
+            
+            status.classList.remove('hidden');
+            if (result.success) {
+                status.textContent = '✅ You\'re on the list!';
+                status.className = 'mt-2 text-green-200';
+                document.getElementById('inlineEmail').value = '';
+            } else {
+                status.textContent = '❌ ' + (result.error || 'Please try again');
+                status.className = 'mt-2 text-red-200';
+            }
+            
+            btn.disabled = false;
+            btn.textContent = 'Get Alerts';
+        });
+
+        document.getElementById('footerEmailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('footerStatus');
+            const email = document.getElementById('footerEmail').value;
+            
+            const result = await submitToAPI('email', { email, source: 'footer' });
+            
+            status.classList.remove('hidden');
+            if (result.success) {
+                status.textContent = '✅ Subscribed!';
+                status.className = 'text-xs mt-2 text-green-400';
+                document.getElementById('footerEmail').value = '';
+            } else {
+                status.textContent = '❌ Try again';
+                status.className = 'text-xs mt-2 text-red-400';
+            }
+        });
+
+        document.getElementById('modalEmailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('modalSubmitBtn');
+            const status = document.getElementById('modalStatus');
+            const email = document.getElementById('modalEmail').value;
+            
+            btn.disabled = true;
+            btn.textContent = 'Subscribing...';
+            
+            const result = await submitToAPI('email', { email, source: 'modal' });
+            
+            status.classList.remove('hidden');
+            if (result.success) {
+                status.textContent = '✅ Welcome! Deals coming your way.';
+                status.className = 'mt-4 text-green-600';
+                setTimeout(() => closeEmailModal(), 2000);
+            } else {
+                status.textContent = '❌ ' + (result.error || 'Please try again');
+                status.className = 'mt-4 text-red-600';
+            }
+            
+            btn.disabled = false;
+            btn.textContent = 'Send Me Deals →';
+        });
+
+        // ========== JAVARI AI ==========
         let chatHistory = [];
         let userContext = {};
 
-        // ========== SMART RESPONSE GENERATOR ==========
         function getSmartResponse(message) {
             const lower = message.toLowerCase();
-            
-            // Detect context clues
             const isPassholder = lower.includes('passholder') || lower.includes('annual pass') || lower.includes('ap ') || userContext.isPassholder;
             const wantsHotel = lower.includes('hotel') || lower.includes('stay') || lower.includes('room') || lower.includes('resort');
             const wantsBudget = lower.includes('cheap') || lower.includes('budget') || lower.includes('afford') || lower.includes('save');
@@ -485,190 +521,80 @@
             const asksDVC = lower.includes('dvc') || lower.includes('vacation club') || lower.includes('points');
             const nightMatch = lower.match(/(\d+)\s*(night|day)/);
             
-            // Update context
             if (isPassholder) userContext.isPassholder = true;
             if (nightMatch) userContext.nights = parseInt(nightMatch[1]);
             
-            // === PASSHOLDER HOTEL SEARCH ===
             if (isPassholder && wantsHotel) {
                 if (!userContext.nights) {
-                    return `🎫 <b>Passholder hotel search!</b>
-
-How many nights are you staying?
-
-(APs get up to 30% off at most Disney resorts!)`;
+                    return `🎫 <b>Passholder hotel search!</b>\n\nHow many nights are you staying?\n\n(APs get up to 30% off at most Disney resorts!)`;
                 }
-                
                 if (!userContext.area) {
-                    return `Got it - ${userContext.nights} nights.
-
-<b>Which area works best?</b>
-• <b>Magic Kingdom</b> - Monorail, walk to MK
-• <b>EPCOT</b> - Walk to EPCOT & Hollywood Studios  
-• <b>Skyliner</b> - Gondola access, great value
-• <b>Any</b> - Show me all options`;
+                    return `Got it - ${userContext.nights} nights.\n\n<b>Which area works best?</b>\n• <b>Magic Kingdom</b> - Monorail, walk to MK\n• <b>EPCOT</b> - Walk to EPCOT & Hollywood Studios\n• <b>Skyliner</b> - Gondola access, great value\n• <b>Any</b> - Show me all options`;
                 }
             }
             
-            // Check for area selection
             if (lower.includes('magic kingdom') || lower.includes('mk area')) {
                 userContext.area = 'mk';
-                return generateAPRecommendations('mk');
+                return generateAPRecs('mk');
             }
             if (lower.includes('epcot') || lower.includes('boardwalk')) {
                 userContext.area = 'epcot';
-                return generateAPRecommendations('epcot');
+                return generateAPRecs('epcot');
             }
             if (lower.includes('skyliner')) {
                 userContext.area = 'skyliner';
-                return generateAPRecommendations('skyliner');
+                return generateAPRecs('skyliner');
             }
             if (lower.includes('any') && userContext.isPassholder) {
-                return generateAPRecommendations('all');
+                return generateAPRecs('all');
             }
             
-            // === WALK TO PARK ===
             if (wantsWalk) {
-                return `<b>🚶 Walk to Park Hotels:</b>
-
-<b>Magic Kingdom (5-10 min):</b>
-• Grand Floridian - $700+/night
-• Contemporary - $500+/night
-
-<b>EPCOT & Hollywood Studios (5-10 min):</b>
-• Beach Club - $500+/night
-• Yacht Club - $500+/night
-• BoardWalk - $500+/night
-• Swan/Dolphin - $250+/night ⭐ Best value!
-
-Swan/Dolphin takes Marriott points too!
-
-Are you a Passholder? I can check AP discounts.`;
+                return `<b>🚶 Walk to Park Hotels:</b>\n\n<b>Magic Kingdom (5-10 min):</b>\n• Grand Floridian - $700+/night\n• Contemporary - $500+/night\n\n<b>EPCOT & Hollywood Studios (5-10 min):</b>\n• Beach Club - $500+/night\n• Yacht Club - $500+/night\n• BoardWalk - $500+/night\n• Swan/Dolphin - $250+/night ⭐ Best value!\n\nSwan/Dolphin takes Marriott points too!\n\nAre you a Passholder? I can check AP discounts.`;
             }
             
-            // === DVC QUESTIONS ===
             if (asksDVC) {
-                return `<b>💎 DVC Rentals:</b>
-
-Owners rent unused points = 30-60% off Deluxe resorts!
-
-<b>Example:</b> Grand Floridian
-• Disney direct: $789/night
-• DVC rental: ~$441/night
-• <b>You save: $348/night (44%)</b>
-
-<b>What you get:</b>
-✓ Same deluxe rooms
-✓ Early Entry (30 min)
-✓ Extended Evening Hours
-✓ Free parking
-
-→ <a href="/dvc" class="text-crav underline">Calculate your savings</a>`;
+                return `<b>💎 DVC Rentals:</b>\n\nOwners rent unused points = 30-60% off Deluxe resorts!\n\n<b>Example:</b> Grand Floridian\n• Disney direct: $789/night\n• DVC rental: ~$441/night\n• <b>You save: $348/night (44%)</b>\n\n<b>What you get:</b>\n✓ Same deluxe rooms\n✓ Early Entry (30 min)\n✓ Extended Evening Hours\n✓ Free parking\n\n→ <a href="/dvc" class="text-crav underline">Calculate your savings</a>`;
             }
             
-            // === BUDGET ===
             if (wantsBudget) {
-                return `<b>💰 Best Budget Options:</b>
-
-<b>Under $150:</b>
-• All-Star Resorts - $130-180
-• Off-site Good Neighbor - $100-150
-
-<b>Best value with perks:</b>
-• Pop Century - $155-210 (has Skyliner!)
-• Swan/Dolphin - $250+ (walk to EPCOT)
-
-<b>Secret savings:</b>
-• DVC rentals: Deluxe for $300-450/night
-
-What's your budget per night?`;
+                return `<b>💰 Best Budget Options:</b>\n\n<b>Under $150:</b>\n• All-Star Resorts - $130-180\n• Off-site Good Neighbor - $100-150\n\n<b>Best value with perks:</b>\n• Pop Century - $155-210 (has Skyliner!)\n• Swan/Dolphin - $250+ (walk to EPCOT)\n\n<b>Secret savings:</b>\n• DVC rentals: Deluxe for $300-450/night\n\nWhat's your budget per night?`;
             }
             
-            // === GREETING ===
             if (lower.match(/^(hi|hello|hey|help|start)/)) {
-                return `Hey! 👋 I'm Javari.
-
-<b>What are you planning?</b>
-• Hotel only (passholder trip)
-• Full vacation (hotel + tickets)
-• Just exploring deals
-
-Or ask me anything about Orlando!`;
+                return `Hey! 👋 I'm Javari.\n\n<b>What are you planning?</b>\n• Hotel only (passholder trip)\n• Full vacation (hotel + tickets)\n• Just exploring deals\n\nOr ask me anything about Orlando!`;
             }
             
-            // === NIGHT COUNT GIVEN ===
             if (nightMatch && !userContext.isPassholder) {
                 userContext.nights = parseInt(nightMatch[1]);
-                return `<b>${userContext.nights}-night stay - got it!</b>
-
-Quick questions:
-1. <b>Passholder?</b> (Up to 30% off)
-2. <b>Budget?</b> (Under $200 / $200-400 / $400+)
-3. <b>Must-have?</b> (Walk to park / Pool / Value)
-
-What matters most to you?`;
+                return `<b>${userContext.nights}-night stay - got it!</b>\n\nQuick questions:\n1. <b>Passholder?</b> (Up to 30% off)\n2. <b>Budget?</b> (Under $200 / $200-400 / $400+)\n3. <b>Must-have?</b> (Walk to park / Pool / Value)\n\nWhat matters most to you?`;
             }
             
-            // === DEFAULT ===
-            return `I can help with:
-
-• <b>Hotels</b> - Disney, partner, off-site
-• <b>AP Deals</b> - Passholder discounts
-• <b>DVC</b> - Save 30-60% on Deluxe
-• <b>Walk to park</b> - Closest hotels
-
-What would you like to know?`;
+            return `I can help with:\n\n• <b>Hotels</b> - Disney, partner, off-site\n• <b>AP Deals</b> - Passholder discounts\n• <b>DVC</b> - Save 30-60% on Deluxe\n• <b>Walk to park</b> - Closest hotels\n\nWhat would you like to know?`;
         }
 
-        function generateAPRecommendations(area) {
+        function generateAPRecs(area) {
             const nights = userContext.nights || 2;
             let response = `<b>🎫 AP Recommendations (${nights} nights):</b>\n\n`;
             
             if (area === 'mk' || area === 'all') {
-                response += `<b>Magic Kingdom Area:</b>
-• Contemporary - $425/night (25% AP off)
-• Polynesian - $510/night (20% AP off)
-• Wilderness Lodge - $380/night (25% AP off)
-
-`;
+                response += `<b>Magic Kingdom Area:</b>\n• Contemporary - $425/night (25% AP off)\n• Polynesian - $510/night (20% AP off)\n• Wilderness Lodge - $380/night (25% AP off)\n\n`;
             }
-            
             if (area === 'epcot' || area === 'all') {
-                response += `<b>EPCOT Area (walk to parks!):</b>
-• Swan/Dolphin - $250/night (30% AP off!) ⭐
-• Beach Club - $425/night (25% AP off)
-• BoardWalk - $425/night (25% AP off)
-
-`;
+                response += `<b>EPCOT Area (walk to parks!):</b>\n• Swan/Dolphin - $250/night (30% AP off!) ⭐\n• Beach Club - $425/night (25% AP off)\n• BoardWalk - $425/night (25% AP off)\n\n`;
             }
-            
             if (area === 'skyliner' || area === 'all') {
-                response += `<b>Skyliner (best value):</b>
-• Pop Century - $155/night (25% AP off)
-• Caribbean Beach - $210/night (25% AP off)
-• Riviera - $380/night (20% AP off)
-
-`;
+                response += `<b>Skyliner (best value):</b>\n• Pop Century - $155/night (25% AP off)\n• Caribbean Beach - $210/night (25% AP off)\n• Riviera - $380/night (20% AP off)\n\n`;
             }
-            
-            response += `💡 <b>Pro tip:</b> Swan/Dolphin = AP discount + Marriott points!
-
-Want me to check DVC rentals? Often even cheaper.`;
-            
+            response += `💡 <b>Pro tip:</b> Swan/Dolphin = AP discount + Marriott points!\n\nWant me to check DVC rentals? Often even cheaper.`;
             return response;
         }
 
-        // ========== CHAT FUNCTIONS ==========
         function openAIChat() {
             document.getElementById('aiChatWidget').classList.remove('hidden');
             document.getElementById('aiFab').classList.add('hidden');
             if (chatHistory.length === 0) {
-                addBotMessage(`Hey! 👋 I'm Javari, your Orlando trip planner.
-
-<b>What are you planning?</b>
-• Hotel only (passholder trip)
-• Full vacation (hotel + tickets)
-• Just exploring deals`);
+                addBotMessage(`Hey! 👋 I'm Javari, your Orlando trip planner.\n\n<b>What are you planning?</b>\n• Hotel only (passholder trip)\n• Full vacation (hotel + tickets)\n• Just exploring deals`);
             }
         }
 
@@ -681,10 +607,8 @@ Want me to check DVC rentals? Often even cheaper.`;
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             if (!message) return;
-            
             addUserMessage(message);
             input.value = '';
-            
             setTimeout(() => {
                 const response = getSmartResponse(message);
                 addBotMessage(response);
@@ -705,7 +629,7 @@ Want me to check DVC rentals? Often even cheaper.`;
 
         function addBotMessage(text) {
             const container = document.getElementById('chatMessages');
-            container.innerHTML += `<div class="chat-bubble bg-white border rounded-lg p-3 max-w-[85%] text-sm">${text}</div>`;
+            container.innerHTML += `<div class="chat-bubble bg-white border rounded-lg p-3 max-w-[85%] text-sm">${text.replace(/\n/g, '<br>')}</div>`;
             chatHistory.push({role: 'bot', content: text});
             container.scrollTop = container.scrollHeight;
         }
@@ -748,23 +672,23 @@ Want me to check DVC rentals? Often even cheaper.`;
                 checkout: document.getElementById('tripCheckout').value,
                 adults: document.getElementById('adults').value,
                 children: document.getElementById('children').value,
-                rooms: document.getElementById('rooms').value,
-                budget: document.getElementById('budget').value,
-                passholder: document.getElementById('passholder').value,
-                includeDVC: document.getElementById('includeDVC').checked
+                includeDVC: document.getElementById('includeDVC').checked,
+                passholder: document.getElementById('isPassholder').checked
             });
             window.location.href = `/results?${params.toString()}`;
         }
 
-        // ========== EMAIL ==========
+        // ========== EMAIL MODAL ==========
         function openEmailModal() { document.getElementById('emailModal').classList.remove('hidden'); }
         function closeEmailModal() { document.getElementById('emailModal').classList.add('hidden'); }
-        function submitEmail(e) { e.preventDefault(); alert('🎉 You\'re on the list!'); document.getElementById('emailInput').value = ''; }
-        function submitModalEmail(e) { e.preventDefault(); closeEmailModal(); alert('🎉 Welcome! Deals coming your way.'); }
-        function submitFooterEmail(e) { e.preventDefault(); alert('🎉 Subscribed!'); e.target.reset(); }
 
-        // Show modal after 45s
-        setTimeout(() => { if (!localStorage.getItem('emailShown')) { openEmailModal(); localStorage.setItem('emailShown', '1'); }}, 45000);
+        // Show modal after 45s (once per session)
+        setTimeout(() => { 
+            if (!sessionStorage.getItem('emailModalShown')) { 
+                openEmailModal(); 
+                sessionStorage.setItem('emailModalShown', '1'); 
+            }
+        }, 45000);
     </script>
 </body>
 </html>

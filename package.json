@@ -1,12 +1,13 @@
 {
-  "name": "orlando-vacation-deals",
-  "version": "2.0.0",
-  "description": "Complete Orlando vacation planning with real deals from Disney, Universal, SeaWorld - DVC rentals, hotel comparison, passholder perks",
+  "name": "crav-orlando-deals",
+  "version": "3.0.0",
+  "description": "Orlando Vacation Deals - Disney, Universal, SeaWorld Planning",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "start": "npx serve public",
-    "dev": "npx serve public"
+    "dev": "vercel dev"
   },
-  "keywords": ["disney", "universal", "seaworld", "orlando", "vacation", "deals", "dvc", "travel"],
-  "author": "CR AudioViz AI",
-  "license": "MIT"
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0"
+  }
 }

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Crowd Calendar 2025 - Disney, Universal, SeaWorld</title>
+    <meta name="description" content="Free Orlando crowd calendar showing busy and slow days at Disney World, Universal Orlando, and SeaWorld through 2025-2026.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'seaworld': '#0077B6', 'crav': '#6366F1' }}}}</script>
+    <style>
+        .crowd-1,.crowd-2,.crowd-3 { background: #22c55e; color: white; }
+        .crowd-4,.crowd-5 { background: #eab308; color: black; }
+        .crowd-6,.crowd-7 { background: #f97316; color: white; }
+        .crowd-8,.crowd-9,.crowd-10 { background: #ef4444; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-disney">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-disney to-universal text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">Orlando Crowd Calendar 2025-2026</h1>
+            <p class="text-white/90">Plan your visit around the crowds - updated monthly</p>
+        </div>
+    </section>
+
+    <section class="py-8 bg-white border-b">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
+                <span class="font-medium">Crowd Level:</span>
+                <span class="px-3 py-1 rounded crowd-1">1-3 Low</span>
+                <span class="px-3 py-1 rounded crowd-5">4-5 Moderate</span>
+                <span class="px-3 py-1 rounded crowd-7">6-7 Busy</span>
+                <span class="px-3 py-1 rounded crowd-10">8-10 Peak</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex gap-4 mb-6 overflow-x-auto">
+                <button onclick="showMonth(11, 2025)" class="month-btn px-4 py-2 bg-disney text-white rounded-lg text-sm whitespace-nowrap">Dec 2025</button>
+                <button onclick="showMonth(0, 2026)" class="month-btn px-4 py-2 bg-gray-200 rounded-lg text-sm whitespace-nowrap">Jan 2026</button>
+                <button onclick="showMonth(1, 2026)" class="month-btn px-4 py-2 bg-gray-200 rounded-lg text-sm whitespace-nowrap">Feb 2026</button>
+                <button onclick="showMonth(2, 2026)" class="month-btn px-4 py-2 bg-gray-200 rounded-lg text-sm whitespace-nowrap">Mar 2026</button>
+                <button onclick="showMonth(3, 2026)" class="month-btn px-4 py-2 bg-gray-200 rounded-lg text-sm whitespace-nowrap">Apr 2026</button>
+                <button onclick="showMonth(4, 2026)" class="month-btn px-4 py-2 bg-gray-200 rounded-lg text-sm whitespace-nowrap">May 2026</button>
+            </div>
+
+            <div id="calendarGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Disney Calendar -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-disney text-white p-4 flex items-center gap-2">
+                        <span class="text-2xl">🏰</span>
+                        <span class="font-bold">Walt Disney World</span>
+                    </div>
+                    <div id="disneyCalendar" class="p-4"></div>
+                </div>
+                
+                <!-- Universal Calendar -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-universal text-white p-4 flex items-center gap-2">
+                        <span class="text-2xl">🎢</span>
+                        <span class="font-bold">Universal Orlando</span>
+                    </div>
+                    <div id="universalCalendar" class="p-4"></div>
+                </div>
+                
+                <!-- SeaWorld Calendar -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-seaworld text-white p-4 flex items-center gap-2">
+                        <span class="text-2xl">🐋</span>
+                        <span class="font-bold">SeaWorld Orlando</span>
+                    </div>
+                    <div id="seaworldCalendar" class="p-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Best & Worst Times to Visit in 2025-2026</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-50 rounded-xl p-6">
+                    <h3 class="font-bold text-green-800 mb-4">✅ Best Times (Lower Crowds)</h3>
+                    <ul class="space-y-2 text-sm text-green-900">
+                        <li>• <strong>January 7-31</strong> - Post-holiday lull</li>
+                        <li>• <strong>Late August</strong> - Schools back in session</li>
+                        <li>• <strong>September</strong> - Lowest crowds of year</li>
+                        <li>• <strong>Early December</strong> - Before holiday rush</li>
+                        <li>• <strong>Late February</strong> - Between holidays</li>
+                    </ul>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6">
+                    <h3 class="font-bold text-red-800 mb-4">❌ Worst Times (Peak Crowds)</h3>
+                    <ul class="space-y-2 text-sm text-red-900">
+                        <li>• <strong>Christmas Week</strong> - Busiest of the year</li>
+                        <li>• <strong>Spring Break</strong> - March/April</li>
+                        <li>• <strong>July 4th Week</strong> - Major holiday</li>
+                        <li>• <strong>Thanksgiving Week</strong> - Heavy crowds</li>
+                        <li>• <strong>Fall Break</strong> - October has gotten busy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Section -->
+    <section class="py-8 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <p class="text-xs text-gray-400 mb-2">SPONSORED</p>
+            <div class="bg-white rounded-xl p-6 shadow-sm">
+                <h3 class="font-bold text-lg mb-2">🎟️ Save on Theme Park Tickets</h3>
+                <p class="text-gray-600 mb-4">Undercover Tourist offers discount tickets to Disney, Universal, and SeaWorld</p>
+                <a href="https://www.undercovertourist.com" target="_blank" class="inline-block bg-disney text-white px-6 py-2 rounded-lg hover:bg-purple-800">Compare Prices →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+            <p class="text-gray-500 text-xs mt-2">Crowd predictions based on historical data. Actual crowds may vary.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Crowd data based on historical patterns
+        const crowdData = {
+            disney: {
+                // December 2025
+                '2025-11': [5,5,5,5,6,7,6,5,5,5,5,6,7,6,5,5,5,5,6,8,9,10,10,10,10,10,10,9,9,9,9],
+                // January 2026
+                '2026-0': [10,9,8,6,5,4,4,4,4,5,5,4,4,4,4,4,4,5,6,5,4,4,4,4,5,5,4,4,4,4,4],
+                // February 2026
+                '2026-1': [4,4,4,4,5,5,4,4,4,4,5,6,7,8,8,7,6,5,5,5,5,5,5,5,5,5,5,5],
+                // March 2026
+                '2026-2': [5,5,5,5,6,6,6,6,6,6,7,7,8,8,9,9,9,8,8,8,9,9,8,7,7,7,7,7,6,6,6],
+                // April 2026
+                '2026-3': [6,6,7,8,8,8,8,7,7,7,7,8,8,8,7,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5],
+                // May 2026
+                '2026-4': [5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,7,8,9,9,8,7,6,6,6,6,6]
+            },
+            universal: {
+                '2025-11': [4,4,4,4,5,6,5,4,4,4,4,5,6,5,4,4,4,4,5,7,8,9,9,9,9,9,9,8,8,8,8],
+                '2026-0': [9,8,7,5,4,3,3,3,3,4,4,3,3,3,3,3,3,4,5,4,3,3,3,3,4,4,3,3,3,3,3],
+                '2026-1': [3,3,3,3,4,4,3,3,3,3,4,5,6,7,7,6,5,4,4,4,4,4,4,4,4,4,4,4],
+                '2026-2': [4,4,4,4,5,5,5,5,5,5,6,6,7,7,8,8,8,7,7,7,8,8,7,6,6,6,6,6,5,5,5],
+                '2026-3': [5,5,6,7,7,7,7,6,6,6,6,7,7,7,6,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4],
+                '2026-4': [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,6,7,8,8,7,6,5,5,5,5,5]
+            },
+            seaworld: {
+                '2025-11': [3,3,3,3,4,5,4,3,3,3,3,4,5,4,3,3,3,3,4,6,7,8,8,8,8,8,8,7,7,7,7],
+                '2026-0': [8,7,6,4,3,2,2,2,2,3,3,2,2,2,2,2,2,3,4,3,2,2,2,2,3,3,2,2,2,2,2],
+                '2026-1': [2,2,2,2,3,3,2,2,2,2,3,4,5,6,6,5,4,3,3,3,3,3,3,3,3,3,3,3],
+                '2026-2': [3,3,3,3,4,4,4,4,4,4,5,5,6,6,7,7,7,6,6,6,7,7,6,5,5,5,5,5,4,4,4],
+                '2026-3': [4,4,5,6,6,6,6,5,5,5,5,6,6,6,5,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3],
+                '2026-4': [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,5,6,7,7,6,5,4,4,4,4,4]
+            }
+        };
+
+        function generateCalendar(container, crowdLevels, month, year) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            
+            let html = `<div class="text-center font-bold mb-2">${monthNames[month]} ${year}</div>`;
+            html += '<div class="grid grid-cols-7 gap-1 text-xs text-center">';
+            html += '<div class="text-gray-400">S</div><div class="text-gray-400">M</div><div class="text-gray-400">T</div><div class="text-gray-400">W</div><div class="text-gray-400">T</div><div class="text-gray-400">F</div><div class="text-gray-400">S</div>';
+            
+            for(let i = 0; i < firstDay; i++) {
+                html += '<div></div>';
+            }
+            
+            for(let day = 1; day <= daysInMonth; day++) {
+                const crowd = crowdLevels[day - 1] || 5;
+                html += `<div class="crowd-${crowd} rounded p-1 text-xs font-medium">${day}</div>`;
+            }
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function showMonth(month, year) {
+            document.querySelectorAll('.month-btn').forEach(btn => btn.classList.remove('bg-disney', 'text-white'));
+            event.target.classList.add('bg-disney', 'text-white');
+            event.target.classList.remove('bg-gray-200');
+            
+            const key = `${year}-${month}`;
+            generateCalendar(document.getElementById('disneyCalendar'), crowdData.disney[key] || [], month, year);
+            generateCalendar(document.getElementById('universalCalendar'), crowdData.universal[key] || [], month, year);
+            generateCalendar(document.getElementById('seaworldCalendar'), crowdData.seaworld[key] || [], month, year);
+        }
+
+        // Initialize with December 2025
+        showMonth(11, 2025);
+    </script>
+</body>
+</html>

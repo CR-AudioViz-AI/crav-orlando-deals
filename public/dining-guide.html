@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Restaurants at Disney World & Universal Orlando 2025 - Dining Guide</title>
+    <meta name="description" content="Complete guide to dining at Disney World and Universal Orlando. Best restaurants, reservations tips, and budget-friendly options.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'crav': '#6366F1' }}}}</script>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-disney">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">🍽️ Orlando Dining Guide</h1>
+            <p class="text-white/90">Best restaurants, reservation tips & budget-friendly eats</p>
+        </div>
+    </section>
+
+    <!-- Quick Filter -->
+    <section class="py-4 bg-white border-b sticky top-16 z-40">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-wrap gap-2">
+                <button onclick="filterRestaurants('all')" class="filter-btn px-3 py-1 bg-disney text-white rounded-full text-sm">All</button>
+                <button onclick="filterRestaurants('character')" class="filter-btn px-3 py-1 bg-gray-200 rounded-full text-sm">👸 Character Dining</button>
+                <button onclick="filterRestaurants('signature')" class="filter-btn px-3 py-1 bg-gray-200 rounded-full text-sm">⭐ Signature/Fine</button>
+                <button onclick="filterRestaurants('budget')" class="filter-btn px-3 py-1 bg-gray-200 rounded-full text-sm">💰 Budget-Friendly</button>
+                <button onclick="filterRestaurants('unique')" class="filter-btn px-3 py-1 bg-gray-200 rounded-full text-sm">✨ Unique Experience</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-5xl mx-auto px-4">
+
+            <!-- Reservation Tips -->
+            <div class="bg-yellow-50 rounded-xl p-6 mb-8">
+                <h2 class="text-xl font-bold mb-3">📅 Reservation Tips</h2>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <h4 class="font-bold text-yellow-800">Disney World</h4>
+                        <ul class="space-y-1 text-yellow-900">
+                            <li>• Book 60 days ahead at 6:00 AM ET</li>
+                            <li>• Resort guests can book entire stay</li>
+                            <li>• Use MouseDining.com for alerts</li>
+                            <li>• Check 24-48 hrs before (cancellations)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-yellow-800">Universal Orlando</h4>
+                        <ul class="space-y-1 text-yellow-900">
+                            <li>• Easier reservations than Disney</li>
+                            <li>• Many accept walk-ups</li>
+                            <li>• Book via OpenTable or Universal app</li>
+                            <li>• CityWalk = no park ticket needed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disney World Restaurants -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-disney mb-4">🏰 Walt Disney World</h2>
+                
+                <div class="grid gap-4" id="disney-restaurants">
+                    <!-- Character Dining -->
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="character">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">👸</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Cinderella's Royal Table</h3>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">$$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Magic Kingdom • Character Dining</p>
+                                <p class="text-sm mt-2">Dine inside Cinderella Castle with princesses. Most iconic character meal. Book at exactly 60 days!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded">Character</span>
+                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Hard to Book</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="character">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🐻</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Chef Mickey's</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Contemporary Resort • Character Dining</p>
+                                <p class="text-sm mt-2">Mickey, Minnie, Donald, Goofy, Pluto. Breakfast or dinner buffet. Great for Fab Five fans!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded">Character</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Buffet</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="character">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🦁</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Tusker House</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Animal Kingdom • Character Dining</p>
+                                <p class="text-sm mt-2">Donald, Daisy, Mickey, Goofy in safari outfits. African-inspired buffet. Great before/after safaris.</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded">Character</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Signature Dining -->
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="signature">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🥀</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Be Our Guest</h3>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">$$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Magic Kingdom • Signature Dining</p>
+                                <p class="text-sm mt-2">Dine in Beast's Castle! Ballroom, West Wing, Gallery. French-inspired menu. No characters, just the Beast.</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Hard to Book</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Unique Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="signature unique">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🚀</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Space 220</h3>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded">$$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">EPCOT • Signature Dining</p>
+                                <p class="text-sm mt-2">Take a 'space elevator' to dine 220 miles above Earth. Views of space station. Incredible experience!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Hard to Book</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Unique Experience</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="unique">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍹</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Oga's Cantina</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Hollywood Studios • Bar/Lounge</p>
+                                <p class="text-sm mt-2">Star Wars cantina! Unique cocktails, DJ Rex, incredible theming. 45-min time limit. Adults love it!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Unique Experience</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Bar</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Budget Options -->
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="budget">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🌮</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Pecos Bill Tall Tale Inn</h3>
+                                    <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Magic Kingdom • Quick Service</p>
+                                <p class="text-sm mt-2">Best quick service at MK. Huge portions, great toppings bar, Tex-Mex favorites.</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Quick Service</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Value</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="budget">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍜</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Satu'li Canteen</h3>
+                                    <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Animal Kingdom • Quick Service</p>
+                                <p class="text-sm mt-2">Best quick service at Disney! Build-your-own bowls, healthy options, incredible theming in Pandora.</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Quick Service</span>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Value</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Fan Favorite</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="budget">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍕</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Via Napoli</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">EPCOT (Italy) • Table Service</p>
+                                <p class="text-sm mt-2">Authentic wood-fired pizza! Share a large pizza = great value. One of best values at EPCOT.</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Value</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Shareable</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universal Restaurants -->
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-universal mb-4">🎢 Universal Orlando</h2>
+                
+                <div class="grid gap-4" id="universal-restaurants">
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="unique">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍺</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Three Broomsticks</h3>
+                                    <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Islands of Adventure (Hogsmeade) • Quick Service</p>
+                                <p class="text-sm mt-2">British pub food in Hogsmeade. Butterbeer, fish & chips, shepherd's pie. Great theming!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Unique Experience</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Quick Service</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="unique signature">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍫</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Toothsome Chocolate Emporium</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">CityWalk • Table Service</p>
+                                <p class="text-sm mt-2">Steampunk theming, INSANE milkshakes, great steaks. No park ticket needed!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Unique Experience</span>
+                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">No Park Ticket</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="signature character">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">👨‍🍳</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Cafe La Bamba (Character Breakfast)</h3>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded">$$$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Universal Studios • Character Dining</p>
+                                <p class="text-sm mt-2">Meet Shrek, Donkey, Minions, & more. Saturday & Sunday only. Great for kids!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded">Character</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card bg-white rounded-xl shadow-sm p-5" data-type="budget">
+                        <div class="flex items-start gap-4">
+                            <span class="text-4xl">🍕</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">Leaky Cauldron</h3>
+                                    <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">$$</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Universal Studios (Diagon Alley) • Quick Service</p>
+                                <p class="text-sm mt-2">British pub food in Diagon Alley. Great theming, huge portions, Butterbeer!</p>
+                                <div class="flex gap-2 mt-2">
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Value</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Quick Service</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Price Guide -->
+            <div class="bg-gray-100 rounded-xl p-6">
+                <h2 class="text-xl font-bold mb-3">💰 Price Guide (Per Person)</h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center text-sm">
+                    <div class="bg-white rounded-lg p-3">
+                        <span class="text-green-600 font-bold">$</span>
+                        <p>Under $15</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <span class="text-green-600 font-bold">$$</span>
+                        <p>$15-30</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <span class="text-orange-600 font-bold">$$$</span>
+                        <p>$30-50</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <span class="text-orange-600 font-bold">$$$$</span>
+                        <p>$50-80</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-3">
+                        <span class="text-purple-600 font-bold">$$$$$</span>
+                        <p>$80+</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterRestaurants(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-disney', 'text-white');
+                btn.classList.add('bg-gray-200');
+            });
+            event.target.classList.remove('bg-gray-200');
+            event.target.classList.add('bg-disney', 'text-white');
+
+            document.querySelectorAll('.restaurant-card').forEach(card => {
+                if (type === 'all' || card.dataset.type.includes(type)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Vacation FAQ - Disney World, Universal, SeaWorld Questions Answered</title>
+    <meta name="description" content="Answers to the most common questions about visiting Disney World, Universal Orlando, and SeaWorld. Everything first-timers need to know.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'crav': '#6366F1' }}}}</script>
+    <style>
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .faq-answer.open { max-height: 500px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-disney">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-gray-700 to-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">❓ Frequently Asked Questions</h1>
+            <p class="text-white/90">Your Orlando vacation questions, answered</p>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-3xl mx-auto px-4 space-y-8">
+
+            <!-- Quick Category Jump -->
+            <div class="flex flex-wrap gap-2 justify-center">
+                <a href="#general" class="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-disney hover:text-white">General</a>
+                <a href="#tickets" class="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-disney hover:text-white">Tickets</a>
+                <a href="#planning" class="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-disney hover:text-white">Planning</a>
+                <a href="#parks" class="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-disney hover:text-white">In the Parks</a>
+                <a href="#kids" class="px-4 py-2 bg-gray-200 rounded-full text-sm hover:bg-disney hover:text-white">Kids & Families</a>
+            </div>
+
+            <!-- General Questions -->
+            <div id="general" class="space-y-4">
+                <h2 class="text-xl font-bold border-b pb-2">General Questions</h2>
+                
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>How many days do I need for Orlando?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">A typical Orlando vacation is <strong>5-7 days</strong>. Here's a breakdown:</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• <strong>Disney only:</strong> 4-5 days (1 day per park)</li>
+                            <li>• <strong>Disney + Universal:</strong> 6-7 days</li>
+                            <li>• <strong>Disney + Universal + SeaWorld:</strong> 8-10 days</li>
+                            <li>• Add 1-2 rest days if traveling with young kids</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What's the best time of year to visit?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>Best times</strong> for low crowds & reasonable weather:</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• <strong>January 7-31:</strong> Post-holiday lull, lowest crowds</li>
+                            <li>• <strong>Late August - September:</strong> Kids back in school</li>
+                            <li>• <strong>Early December (before 20th):</strong> Holiday decorations, lighter crowds</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2"><strong>Avoid:</strong> Spring Break, Christmas week, Thanksgiving, July 4th</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>How much does an Orlando vacation cost?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">For a family of 4, expect:</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• <strong>Budget:</strong> $3,000-4,500 (off-site hotel, 4 days)</li>
+                            <li>• <strong>Moderate:</strong> $5,000-8,000 (Disney Value/Mod, 6 days)</li>
+                            <li>• <strong>Deluxe:</strong> $10,000+ (Deluxe resort, 7+ days)</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2">Use our <a href="/budget-calculator" class="text-disney underline">Budget Calculator</a> for personalized estimates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tickets Questions -->
+            <div id="tickets" class="space-y-4">
+                <h2 class="text-xl font-bold border-b pb-2">Tickets & Passes</h2>
+                
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Do I need Park Hopper at Disney?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">Probably <strong>not for first-timers</strong>. Park Hopper adds $65/ticket.</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Each park has enough for a full day</li>
+                            <li>• Hopping wastes time on transportation</li>
+                            <li>• <strong>Consider it if:</strong> You've been before, short trip, or specific dinner reservation at different park</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What's the difference between Lightning Lane and Genie+?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">Disney changed the system in 2024:</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• <strong>Lightning Lane Multi Pass ($15-30/day):</strong> Skip lines on most rides, book 3 at a time</li>
+                            <li>• <strong>Individual Lightning Lane ($15-35/ride):</strong> For the most popular rides only (TRON, Guardians, Flight of Passage)</li>
+                            <li>• These are <strong>separate</strong> from park tickets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Is Universal Express Pass worth it?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>Yes, on busy days!</strong> It's expensive ($109-389) but...</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• <strong>Pro tip:</strong> Stay at a Premier hotel (Portofino, Hard Rock, Royal Pacific) - Express is FREE!</li>
+                            <li>• Hotel upgrade often costs less than buying Express separately</li>
+                            <li>• Note: Express doesn't work on Hagrid's or VelociCoaster</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planning Questions -->
+            <div id="planning" class="space-y-4">
+                <h2 class="text-xl font-bold border-b pb-2">Planning</h2>
+                
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>When should I book Disney dining reservations?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>60 days before</strong> at exactly 6:00 AM ET.</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Popular restaurants book within MINUTES</li>
+                            <li>• Be logged in at 5:55 AM ET with payment saved</li>
+                            <li>• Resort guests can book entire stay at 60-day mark</li>
+                            <li>• Use <a href="https://mousedining.com" target="_blank" class="text-disney underline">MouseDining.com</a> for cancellation alerts</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Should I stay on Disney property or off-site?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>Disney resort perks:</strong></p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Early Theme Park Entry (30 min early!)</li>
+                            <li>• Free transportation</li>
+                            <li>• Book Lightning Lane 7 days out</li>
+                            <li>• MagicBand+ perks</li>
+                        </ul>
+                        <p class="text-gray-600 mt-2"><strong>Off-site benefits:</strong></p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• 50-70% cheaper</li>
+                            <li>• Often bigger rooms, kitchens</li>
+                            <li>• More flexibility</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Do I need a rental car?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            <li>• <strong>Disney only, staying on-site:</strong> NO - free buses, Skyliner, boats, monorail</li>
+                            <li>• <strong>Disney + Universal:</strong> Maybe - Uber/Lyft can be cheaper</li>
+                            <li>• <strong>Off-site hotel:</strong> Usually YES</li>
+                            <li>• <strong>Multiple resorts/parks:</strong> YES - saves time & money</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2">See our <a href="/transportation" class="text-disney underline">Transportation Guide</a> for pricing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In the Parks Questions -->
+            <div id="parks" class="space-y-4">
+                <h2 class="text-xl font-bold border-b pb-2">In the Parks</h2>
+                
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Can I bring food into the parks?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>YES!</strong> At Disney World:</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Snacks, sandwiches, drinks allowed</li>
+                            <li>• No glass containers (except baby food)</li>
+                            <li>• No alcohol</li>
+                            <li>• Coolers allowed (soft-sided, no larger than 24"x15"x18")</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2">Universal has similar rules but stricter bag size limits.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What time should I arrive at the parks?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>30-45 minutes before opening</strong> for rope drop.</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Security + entry takes 15-20 min</li>
+                            <li>• They often let you in early to Main Street (Disney) or front areas (Universal)</li>
+                            <li>• The first hour is worth 3 hours later</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What happens if it rains?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>Florida summer rain is your friend!</strong></p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Afternoon storms usually last 30-60 minutes</li>
+                            <li>• Crowds flee = short lines after rain</li>
+                            <li>• Indoor rides still operate</li>
+                            <li>• Bring a poncho ($1 at Dollar Tree vs $15 at parks)</li>
+                            <li>• Parks do NOT close for rain</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids & Families Questions -->
+            <div id="kids" class="space-y-4">
+                <h2 class="text-xl font-bold border-b pb-2">Kids & Families</h2>
+                
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What if my child is too short for a ride?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">Use <strong>Rider Switch</strong> (Disney) or <strong>Child Swap</strong> (Universal):</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Group 1 rides while Group 2 waits with child</li>
+                            <li>• Then they swap - no waiting twice!</li>
+                            <li>• Available at all rides with height requirements</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2">Check our <a href="/height-checker" class="text-disney underline">Height Checker</a> before your trip.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>Do I need a stroller?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600">If your child is under 5, <strong>YES</strong>.</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Average walking: 15,000-25,000 steps/day</li>
+                            <li>• Even older kids get tired</li>
+                            <li>• Bring your own or rent at park ($15-18/day)</li>
+                            <li>• Stroller rentals outside parks are cheaper ($5-10/day)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <button class="faq-toggle w-full text-left p-4 font-medium flex justify-between items-center" onclick="toggleFaq(this)">
+                        <span>What's the best age for Disney?</span>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </button>
+                    <div class="faq-answer px-4 pb-4">
+                        <p class="text-gray-600"><strong>4-10 years old</strong> is the "magical" window.</p>
+                        <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                            <li>• Old enough to remember it</li>
+                            <li>• Still believes in the magic</li>
+                            <li>• Tall enough for most rides (40"+)</li>
+                            <li>• Under 3 is FREE but exhausting for parents</li>
+                        </ul>
+                        <p class="text-sm text-gray-600 mt-2">That said, Disney is magical at ANY age!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still have questions -->
+            <div class="bg-gradient-to-r from-gray-700 to-gray-900 text-white rounded-xl p-6 text-center">
+                <h3 class="text-xl font-bold mb-2">Still Have Questions?</h3>
+                <p class="text-sm mb-4">Use our free planning tools to prepare for your trip!</p>
+                <a href="/tools" class="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-bold hover:bg-gray-100">View All Tools →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            
+            answer.classList.toggle('open');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+    </script>
+</body>
+</html>

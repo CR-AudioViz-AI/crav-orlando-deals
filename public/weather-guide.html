@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando Weather Guide by Month - What to Expect at Disney & Universal</title>
+    <meta name="description" content="Monthly Orlando weather guide: temperatures, rain, humidity, and what to pack for Disney World and Universal trips.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'crav': '#6366F1' }}}}</script>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-cyan-600">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">Orlando Weather Guide</h1>
+            <p class="text-white/90">What to expect each month at Disney World & Universal Orlando</p>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-6xl mx-auto px-4">
+            <!-- Month Selector -->
+            <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                <button onclick="showMonth('jan')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Jan</button>
+                <button onclick="showMonth('feb')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Feb</button>
+                <button onclick="showMonth('mar')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Mar</button>
+                <button onclick="showMonth('apr')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Apr</button>
+                <button onclick="showMonth('may')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">May</button>
+                <button onclick="showMonth('jun')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Jun</button>
+                <button onclick="showMonth('jul')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Jul</button>
+                <button onclick="showMonth('aug')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Aug</button>
+                <button onclick="showMonth('sep')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Sep</button>
+                <button onclick="showMonth('oct')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Oct</button>
+                <button onclick="showMonth('nov')" class="month-btn px-3 py-1 bg-gray-200 rounded text-sm hover:bg-cyan-500 hover:text-white">Nov</button>
+                <button onclick="showMonth('dec')" class="month-btn px-3 py-1 bg-cyan-500 text-white rounded text-sm">Dec</button>
+            </div>
+
+            <div id="monthDetail" class="bg-white rounded-xl shadow-sm p-6"></div>
+        </div>
+    </section>
+
+    <!-- Season Overview -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-center">Seasonal Overview</h2>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="bg-blue-50 rounded-xl p-5 text-center">
+                    <div class="text-3xl mb-2">❄️</div>
+                    <h3 class="font-bold text-blue-800">Winter</h3>
+                    <p class="text-sm text-blue-600">Dec - Feb</p>
+                    <p class="text-xs text-gray-600 mt-2">60-70°F days, 45-55°F nights. Pack layers!</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-5 text-center">
+                    <div class="text-3xl mb-2">🌸</div>
+                    <h3 class="font-bold text-green-800">Spring</h3>
+                    <p class="text-sm text-green-600">Mar - May</p>
+                    <p class="text-xs text-gray-600 mt-2">75-85°F. Most comfortable. Occasional storms.</p>
+                </div>
+                <div class="bg-yellow-50 rounded-xl p-5 text-center">
+                    <div class="text-3xl mb-2">☀️</div>
+                    <h3 class="font-bold text-yellow-800">Summer</h3>
+                    <p class="text-sm text-yellow-600">Jun - Aug</p>
+                    <p class="text-xs text-gray-600 mt-2">90°F+, high humidity. Daily afternoon storms.</p>
+                </div>
+                <div class="bg-orange-50 rounded-xl p-5 text-center">
+                    <div class="text-3xl mb-2">🍂</div>
+                    <h3 class="font-bold text-orange-800">Fall</h3>
+                    <p class="text-sm text-orange-600">Sep - Nov</p>
+                    <p class="text-xs text-gray-600 mt-2">80-85°F early, cooling late. Hurricane season.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="py-8 bg-gray-100">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-xl font-bold mb-4">☔ Orlando Rain Tips</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg p-4">
+                    <h4 class="font-bold text-sm mb-2">Summer Storms (Jun-Sep)</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li>• Rain usually hits 3-5 PM, lasts 30-60 min</li>
+                        <li>• Parks clear out = shorter lines after!</li>
+                        <li>• Bring poncho, not umbrella (easier on rides)</li>
+                        <li>• Check weather radar on phone</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg p-4">
+                    <h4 class="font-bold text-sm mb-2">What to Pack Year-Round</h4>
+                    <ul class="text-xs text-gray-600 space-y-1">
+                        <li>• Compact rain poncho or jacket</li>
+                        <li>• Extra socks (wet feet = blisters)</li>
+                        <li>• Ziplock bags for electronics</li>
+                        <li>• Quick-dry clothing when possible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+            <p class="text-gray-500 text-xs mt-2">Weather data based on historical averages. Always check forecast before travel.</p>
+        </div>
+    </footer>
+
+    <script>
+        const weatherData = {
+            jan: { name: 'January', high: 71, low: 50, rain: 2.3, rainDays: 6, humidity: 74, icon: '❄️', tip: 'Coldest month. Pack layers and jacket for evenings. Some days can be chilly!' },
+            feb: { name: 'February', high: 74, low: 52, rain: 2.7, rainDays: 7, humidity: 71, icon: '🌤️', tip: 'Warming up but still cool. Great weather for park touring. President\'s Day is busy.' },
+            mar: { name: 'March', high: 79, low: 57, rain: 3.5, rainDays: 7, humidity: 69, icon: '🌸', tip: 'Spring Break crowds! Beautiful weather but book early. Flower & Garden Festival at EPCOT.' },
+            apr: { name: 'April', high: 83, low: 62, rain: 2.5, rainDays: 5, humidity: 67, icon: '🌷', tip: 'Perfect weather month. Easter crowds early April. Low humidity, ideal for park days.' },
+            may: { name: 'May', high: 88, low: 68, rain: 3.6, rainDays: 9, humidity: 68, icon: '☀️', tip: 'Getting hot! Memorial Day weekend busy. Rain season beginning. Great for water parks.' },
+            jun: { name: 'June', high: 91, low: 74, rain: 7.6, rainDays: 14, humidity: 76, icon: '🌧️', tip: 'HOT and HUMID! Daily afternoon storms. Bring ponchos. Do outdoor rides morning.' },
+            jul: { name: 'July', high: 92, low: 75, rain: 7.3, rainDays: 16, humidity: 77, icon: '🌩️', tip: 'Peak heat. Stay hydrated! Afternoon storms = shorter lines after. July 4th is packed.' },
+            aug: { name: 'August', high: 92, low: 75, rain: 6.8, rainDays: 15, humidity: 78, icon: '⛈️', tip: 'Still hot but crowds drop! Best month for low crowds if you can handle heat. Lots of rain.' },
+            sep: { name: 'September', high: 90, low: 73, rain: 5.5, rainDays: 13, humidity: 77, icon: '🌀', tip: 'Hurricane season peak but lowest crowds! Watch weather forecasts. Heat starting to ease.' },
+            oct: { name: 'October', high: 84, low: 66, rain: 3.3, rainDays: 8, humidity: 73, icon: '🎃', tip: 'Beautiful weather! Halloween events. Fall break crowds can be heavy. Lower humidity.' },
+            nov: { name: 'November', high: 78, low: 59, rain: 2.2, rainDays: 5, humidity: 72, icon: '🍂', tip: 'Ideal weather! Thanksgiving week is packed. Early November = great crowds and weather.' },
+            dec: { name: 'December', high: 72, low: 52, rain: 2.3, rainDays: 6, humidity: 74, icon: '🎄', tip: 'Cool and pleasant. Christmas week is BUSIEST of year. Early Dec is magical with low crowds.' }
+        };
+
+        function showMonth(month) {
+            const data = weatherData[month];
+            document.querySelectorAll('.month-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-white');
+                btn.classList.add('bg-gray-200');
+            });
+            event.target.classList.remove('bg-gray-200');
+            event.target.classList.add('bg-cyan-500', 'text-white');
+            
+            document.getElementById('monthDetail').innerHTML = `
+                <div class="text-center mb-6">
+                    <span class="text-5xl">${data.icon}</span>
+                    <h2 class="text-3xl font-bold text-gray-900 mt-2">${data.name}</h2>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-red-50 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-bold text-red-600">${data.high}°F</div>
+                        <div class="text-sm text-gray-600">Avg High</div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-bold text-blue-600">${data.low}°F</div>
+                        <div class="text-sm text-gray-600">Avg Low</div>
+                    </div>
+                    <div class="bg-cyan-50 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-bold text-cyan-600">${data.rainDays}</div>
+                        <div class="text-sm text-gray-600">Rainy Days</div>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4 text-center">
+                        <div class="text-3xl font-bold text-purple-600">${data.humidity}%</div>
+                        <div class="text-sm text-gray-600">Humidity</div>
+                    </div>
+                </div>
+                
+                <div class="bg-yellow-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-bold text-yellow-800 mb-2">💡 What to Know</h4>
+                    <p class="text-sm text-yellow-900">${data.tip}</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-bold text-gray-800 mb-2">👕 What to Pack</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            ${data.high >= 85 ? '<li>• Lightweight, breathable clothing</li><li>• Sunscreen SPF 30+</li><li>• Cooling towel</li><li>• Insulated water bottle</li>' : ''}
+                            ${data.high < 75 ? '<li>• Light jacket or sweater</li><li>• Long pants option</li><li>• Layers for evening</li>' : ''}
+                            ${data.rainDays >= 10 ? '<li>• Rain poncho (essential!)</li><li>• Waterproof bag for phone</li><li>• Extra socks</li>' : '<li>• Compact rain poncho</li>'}
+                            <li>• Comfortable walking shoes</li>
+                            <li>• Sunglasses & hat</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-bold text-gray-800 mb-2">🎯 Best Strategy</h4>
+                        <ul class="text-sm text-gray-600 space-y-1">
+                            ${data.high >= 88 ? '<li>• Hit outdoor rides early morning</li><li>• Take midday pool/hotel break</li><li>• Return for evening when cooler</li><li>• Hydrate constantly!</li>' : ''}
+                            ${data.high < 80 ? '<li>• All-day park touring possible</li><li>• Outdoor rides comfortable any time</li><li>• Evening fireworks without heat</li>' : ''}
+                            ${data.rainDays >= 10 ? '<li>• Check radar around 2-3 PM</li><li>• Head to indoor attractions when storms hit</li><li>• Lines drop during rain - opportunity!</li>' : ''}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+        
+        showMonth('dec');
+    </script>
+</body>
+</html>

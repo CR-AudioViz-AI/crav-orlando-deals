@@ -2,24 +2,14 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/", "destination": "/public/index.html" },
-    { "source": "/results", "destination": "/public/results.html" },
-    { "source": "/dvc", "destination": "/public/dvc.html" },
-    { "source": "/deals", "destination": "/public/deals.html" },
-    { "source": "/passholder", "destination": "/public/passholder.html" },
-    { "source": "/investors", "destination": "/public/investors.html" },
-    { "source": "/agents", "destination": "/public/agents.html" },
-    { "source": "/contact", "destination": "/public/contact.html" },
-    { "source": "/hotels", "destination": "/public/results.html" },
-    { "source": "/api/:path*", "destination": "/api/:path*" }
+    { "source": "/(.*)", "destination": "/404.html" }
   ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
       ]
     }
   ]

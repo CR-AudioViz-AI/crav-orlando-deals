@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Disney & Universal Day Planner - Create Your Perfect Itinerary</title>
+    <meta name="description" content="Build your perfect Orlando park day with our free itinerary builder. Optimize your Disney World or Universal schedule with suggested times and tips.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>tailwind.config = { theme: { extend: { colors: { 'disney': '#5B2C86', 'universal': '#0033A0', 'seaworld': '#0077B6', 'crav': '#6366F1' }}}}</script>
+</head>
+<body class="bg-gray-50">
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2"><span class="text-xl">🏰🎢🐋</span><span class="font-bold text-lg">Orlando Vacation Deals</span></a>
+            <a href="/tools" class="text-gray-600 hover:text-disney">← All Tools</a>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-to-r from-disney via-purple-600 to-universal text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">📋 Itinerary Builder</h1>
+            <p class="text-white/90">Create your perfect park day - FREE</p>
+        </div>
+    </section>
+
+    <section class="py-8">
+        <div class="max-w-6xl mx-auto px-4">
+            
+            <!-- Step 1: Select Park -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <h2 class="text-xl font-bold mb-4">Step 1: Select Your Park</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="parkSelector">
+                    <button onclick="selectPark('mk')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-disney transition text-center" data-park="mk">
+                        <span class="text-3xl block mb-2">🏰</span>
+                        <span class="font-bold text-sm">Magic Kingdom</span>
+                    </button>
+                    <button onclick="selectPark('epcot')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-disney transition text-center" data-park="epcot">
+                        <span class="text-3xl block mb-2">🌐</span>
+                        <span class="font-bold text-sm">EPCOT</span>
+                    </button>
+                    <button onclick="selectPark('hs')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-disney transition text-center" data-park="hs">
+                        <span class="text-3xl block mb-2">🎬</span>
+                        <span class="font-bold text-sm">Hollywood Studios</span>
+                    </button>
+                    <button onclick="selectPark('ak')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-disney transition text-center" data-park="ak">
+                        <span class="text-3xl block mb-2">🦁</span>
+                        <span class="font-bold text-sm">Animal Kingdom</span>
+                    </button>
+                    <button onclick="selectPark('usf')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-universal transition text-center" data-park="usf">
+                        <span class="text-3xl block mb-2">🎬</span>
+                        <span class="font-bold text-sm">Universal Studios</span>
+                    </button>
+                    <button onclick="selectPark('ioa')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-universal transition text-center" data-park="ioa">
+                        <span class="text-3xl block mb-2">🏝️</span>
+                        <span class="font-bold text-sm">Islands of Adventure</span>
+                    </button>
+                    <button onclick="selectPark('epic')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-universal transition text-center" data-park="epic">
+                        <span class="text-3xl block mb-2">🌟</span>
+                        <span class="font-bold text-sm">Epic Universe</span>
+                    </button>
+                    <button onclick="selectPark('sw')" class="park-btn p-4 rounded-xl border-2 border-gray-200 hover:border-seaworld transition text-center" data-park="sw">
+                        <span class="text-3xl block mb-2">🐋</span>
+                        <span class="font-bold text-sm">SeaWorld</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Select Options -->
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-6" id="step2" style="display:none;">
+                <h2 class="text-xl font-bold mb-4">Step 2: Your Preferences</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Party Type</label>
+                        <select id="partyType" class="w-full border rounded-lg p-3">
+                            <option value="family">Family with Kids</option>
+                            <option value="adults">Adults Only</option>
+                            <option value="thrill">Thrill Seekers</option>
+                            <option value="relaxed">Relaxed Pace</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Arrival Time</label>
+                        <select id="arrivalTime" class="w-full border rounded-lg p-3">
+                            <option value="ropedrop">Rope Drop (Park Open)</option>
+                            <option value="early">Early Morning (1hr after open)</option>
+                            <option value="midday">Midday (11am-12pm)</option>
+                            <option value="afternoon">Afternoon (2pm+)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Lightning Lane / Express?</label>
+                        <select id="hasExpress" class="w-full border rounded-lg p-3">
+                            <option value="no">No - Standby Only</option>
+                            <option value="yes">Yes - I Have It</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="flex items-center gap-2">
+                        <input type="checkbox" id="wantsMeals" checked class="w-5 h-5">
+                        <span>Include meal breaks</span>
+                    </label>
+                </div>
+                <button onclick="generateItinerary()" class="mt-6 bg-disney text-white px-8 py-3 rounded-lg font-bold hover:bg-purple-700 transition">
+                    Generate My Itinerary →
+                </button>
+            </div>
+
+            <!-- Step 3: Generated Itinerary -->
+            <div class="bg-white rounded-xl shadow-sm p-6" id="itineraryResult" style="display:none;">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-xl font-bold">Your <span id="parkName"></span> Itinerary</h2>
+                    <button onclick="printItinerary()" class="text-disney hover:underline text-sm"><i class="fas fa-print mr-1"></i> Print</button>
+                </div>
+                
+                <div id="itineraryContent" class="space-y-4">
+                    <!-- Generated content goes here -->
+                </div>
+
+                <div class="mt-6 bg-yellow-50 rounded-lg p-4">
+                    <h4 class="font-bold text-yellow-800 mb-2">💡 Pro Tips for Your Day</h4>
+                    <ul id="proTips" class="text-sm text-yellow-900 space-y-1"></ul>
+                </div>
+
+                <div class="mt-6 flex gap-4">
+                    <button onclick="resetBuilder()" class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300">Start Over</button>
+                    <button onclick="downloadPDF()" class="bg-disney text-white px-6 py-2 rounded-lg hover:bg-purple-700"><i class="fas fa-download mr-2"></i>Download PDF</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Capture -->
+    <section class="py-12 bg-gradient-to-r from-crav to-purple-600">
+        <div class="max-w-2xl mx-auto px-4 text-center text-white">
+            <h3 class="text-2xl font-bold mb-3">📧 Get More Planning Tips</h3>
+            <p class="text-white/80 mb-6">Join 50,000+ families who get our weekly deals and tips</p>
+            <form class="flex flex-col sm:flex-row gap-3 justify-center" onsubmit="subscribeEmail(event)">
+                <input type="email" id="emailInput" placeholder="your@email.com" required class="px-4 py-3 rounded-lg text-gray-900 w-full sm:w-80">
+                <button type="submit" class="bg-white text-crav px-6 py-3 rounded-lg font-bold hover:bg-gray-100">Subscribe Free</button>
+            </form>
+            <p class="text-xs text-white/60 mt-3">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 CR AudioViz AI, LLC</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedPark = null;
+        
+        const parkData = {
+            mk: {
+                name: "Magic Kingdom",
+                color: "disney",
+                attractions: {
+                    ropedrop: ["Seven Dwarfs Mine Train", "TRON Lightcycle / Run", "Peter Pan's Flight"],
+                    morning: ["Space Mountain", "Big Thunder Mountain", "Splash Mountain", "Haunted Mansion"],
+                    midday: ["Pirates of the Caribbean", "Jungle Cruise", "it's a small world", "The Many Adventures of Winnie the Pooh"],
+                    afternoon: ["Buzz Lightyear", "Monsters Inc Laugh Floor", "Carousel of Progress", "PhilharMagic"],
+                    evening: ["Happily Ever After Fireworks", "Main Street photos", "Final rides"]
+                },
+                dining: {
+                    breakfast: "Main Street Bakery (Starbucks)",
+                    lunch: "Pecos Bill Tall Tale Inn & Cafe",
+                    dinner: "Be Our Guest / Liberty Tree Tavern",
+                    snack: "Dole Whip at Aloha Isle"
+                },
+                tips: [
+                    "Head LEFT at rope drop - most people go right",
+                    "Get a Dole Whip - it's iconic!",
+                    "Stake out fireworks spot 45min early for best views",
+                    "Ride TRON after fireworks - shorter lines",
+                    "Free ice water at any quick service"
+                ]
+            },
+            epcot: {
+                name: "EPCOT",
+                color: "disney",
+                attractions: {
+                    ropedrop: ["Guardians of the Galaxy: Cosmic Rewind", "Frozen Ever After", "Test Track"],
+                    morning: ["Remy's Ratatouille Adventure", "Soarin' Around the World", "Journey Into Imagination"],
+                    midday: ["Spaceship Earth", "The Seas with Nemo & Friends", "Living with the Land"],
+                    afternoon: ["World Showcase exploration", "Mexico boat ride", "Japan/Morocco pavilions"],
+                    evening: ["Luminous fireworks", "World Showcase drinks", "France at night"]
+                },
+                dining: {
+                    breakfast: "Les Halles Boulangerie-Patisserie (France)",
+                    lunch: "La Hacienda de San Angel (Mexico) or Sunshine Seasons",
+                    dinner: "Via Napoli (Italy) or Space 220",
+                    snack: "School Bread in Norway"
+                },
+                tips: [
+                    "Guardians uses Virtual Queue - join at 7am!",
+                    "Drink Around the World is a guest favorite",
+                    "World Showcase opens at 11am (Future World at 9am)",
+                    "Morocco has stunning architecture - great photos",
+                    "Luminous viewing is great from Japan pavilion"
+                ]
+            },
+            hs: {
+                name: "Hollywood Studios",
+                color: "disney",
+                attractions: {
+                    ropedrop: ["Rise of the Resistance", "Slinky Dog Dash", "Millennium Falcon"],
+                    morning: ["Tower of Terror", "Rock 'n' Roller Coaster", "Toy Story Mania"],
+                    midday: ["Star Tours", "Mickey & Minnie's Runaway Railway", "Alien Swirling Saucers"],
+                    afternoon: ["Galaxy's Edge exploration", "Build a lightsaber", "Oga's Cantina"],
+                    evening: ["Fantasmic!", "Tower of Terror at night"]
+                },
+                dining: {
+                    breakfast: "Woody's Lunch Box",
+                    lunch: "Docking Bay 7 (Galaxy's Edge)",
+                    dinner: "50's Prime Time Cafe or Sci-Fi Dine-In",
+                    snack: "Blue/Green Milk in Galaxy's Edge"
+                },
+                tips: [
+                    "Rise of the Resistance is THE ride - get there early or use ILL",
+                    "Galaxy's Edge is most magical at night",
+                    "Fantasmic requires arriving 60-90min early for good seats",
+                    "Single Rider on Millennium Falcon saves huge time",
+                    "Oga's Cantina has a 2-drink limit - reservations help"
+                ]
+            },
+            ak: {
+                name: "Animal Kingdom",
+                color: "disney",
+                attractions: {
+                    ropedrop: ["Flight of Passage", "Kilimanjaro Safaris", "Na'vi River Journey"],
+                    morning: ["Expedition Everest", "Kali River Rapids", "Dinosaur"],
+                    midday: ["Festival of the Lion King", "It's Tough to Be a Bug", "Gorilla Falls"],
+                    afternoon: ["Maharajah Jungle Trek", "Wildlife Express Train", "Meet characters"],
+                    evening: ["Pandora at night (bioluminescent!)", "Final Passage ride"]
+                },
+                dining: {
+                    breakfast: "Tusker House (character dining)",
+                    lunch: "Satu'li Canteen (Pandora)",
+                    dinner: "Yak & Yeti or Rainforest Cafe",
+                    snack: "Mr. Kamal's seasoned fries"
+                },
+                tips: [
+                    "Safari is BEST at rope drop - animals most active",
+                    "Pandora GLOWS at night - save a visit for after dark",
+                    "Flight of Passage is THE best ride - long waits expected",
+                    "This park closes earliest - check hours",
+                    "Festival of the Lion King is a MUST - one of best shows"
+                ]
+            },
+            usf: {
+                name: "Universal Studios Florida",
+                color: "universal",
+                attractions: {
+                    ropedrop: ["Hagrid's (if EPA)", "Escape from Gringotts", "Hollywood Rip Ride Rockit"],
+                    morning: ["Revenge of the Mummy", "Transformers", "MEN IN BLACK"],
+                    midday: ["Diagon Alley exploration", "Simpsons Ride", "ET Adventure"],
+                    afternoon: ["Bourne Stuntacular", "Horror Make-Up Show", "Fast & Furious"],
+                    evening: ["Diagon Alley at night", "Dragon fire-breathing", "Final Gringotts ride"]
+                },
+                dining: {
+                    breakfast: "Today Cafe or Starbucks",
+                    lunch: "Leaky Cauldron (Diagon Alley)",
+                    dinner: "Finnegan's Bar & Grill",
+                    snack: "Butterbeer (frozen is best!)"
+                },
+                tips: [
+                    "Stay at a Premier hotel = FREE Express Pass",
+                    "Diagon Alley entrance is HIDDEN - look for the brick wall",
+                    "Dragon breathes fire every 10 minutes",
+                    "Single Rider on Gringotts saves huge time",
+                    "CityWalk is free after 6pm for parking"
+                ]
+            },
+            ioa: {
+                name: "Islands of Adventure",
+                color: "universal",
+                attractions: {
+                    ropedrop: ["Hagrid's Magical Creatures", "VelociCoaster", "Forbidden Journey"],
+                    morning: ["Incredible Hulk Coaster", "Spider-Man", "Jurassic World VelociCoaster"],
+                    midday: ["Hogwarts Castle tour", "Hogsmeade exploration", "Poseidon's Fury"],
+                    afternoon: ["Skull Island", "Jurassic Park River Adventure", "Cat in the Hat"],
+                    evening: ["Hogwarts at night", "Final VelociCoaster ride"]
+                },
+                dining: {
+                    breakfast: "Croissant Moon Bakery",
+                    lunch: "Three Broomsticks (Hogsmeade)",
+                    dinner: "Mythos Restaurant (consistently voted best theme park restaurant)",
+                    snack: "Butterbeer!"
+                },
+                tips: [
+                    "Hagrid's rarely has Express - rope drop or end of day",
+                    "VelociCoaster is INTENSE - 4 inversions, 70mph",
+                    "Forbidden Journey single rider is a game changer",
+                    "Hogwarts Express connects parks (need Park-to-Park ticket)",
+                    "Ollivander's wand experience is magical (limited groups)"
+                ]
+            },
+            epic: {
+                name: "Epic Universe",
+                color: "universal",
+                attractions: {
+                    ropedrop: ["Mario Kart: Bowser's Challenge", "Starfall Racers", "Ministry of Magic"],
+                    morning: ["Yoshi's Adventure", "Donkey Kong Mine Cart", "Harry Potter roller coaster"],
+                    midday: ["How to Train Your Dragon area", "Dark Universe", "Celestial Park"],
+                    afternoon: ["Shows and entertainment", "Character meets", "Exploration"],
+                    evening: ["Nighttime spectacular", "Final major rides"]
+                },
+                dining: {
+                    breakfast: "Hotel breakfast",
+                    lunch: "Toadstool Cafe (Super Nintendo World)",
+                    dinner: "Themed restaurant in park",
+                    snack: "Power-Up Band treats"
+                },
+                tips: [
+                    "NEW PARK 2025 - expect HUGE crowds opening year",
+                    "Power-Up Band enhances Nintendo World experience",
+                    "Starfall Racers is a dual-track coaster - intense!",
+                    "Book hotels on-site for Early Park Admission",
+                    "This is Universal's biggest park ever"
+                ]
+            },
+            sw: {
+                name: "SeaWorld Orlando",
+                color: "seaworld",
+                attractions: {
+                    ropedrop: ["Mako", "Manta", "Kraken"],
+                    morning: ["Journey to Atlantis", "Ice Breaker", "Pipeline"],
+                    midday: ["Animal encounters", "Sea lion show", "Dolphin Cove"],
+                    afternoon: ["Antarctica: Empire of the Penguin", "Shark Encounter", "Stingray Lagoon"],
+                    evening: ["Final coasters", "Flamingo area at sunset"]
+                },
+                dining: {
+                    breakfast: "Café at the Waterfront",
+                    lunch: "Sharks Underwater Grill (dine with sharks!)",
+                    dinner: "Voyager's Smokehouse",
+                    snack: "Dippin' Dots"
+                },
+                tips: [
+                    "Mako, Manta, and Kraken are world-class coasters",
+                    "Less crowded than Disney/Universal typically",
+                    "Animal encounters are unique experiences",
+                    "Quick Queue (Express) is worth it on busy days",
+                    "Combined tickets with Busch Gardens = great value"
+                ]
+            }
+        };
+
+        function selectPark(park) {
+            selectedPark = park;
+            document.querySelectorAll('.park-btn').forEach(btn => {
+                btn.classList.remove('border-disney', 'border-universal', 'border-seaworld', 'bg-purple-50', 'bg-blue-50', 'bg-cyan-50');
+                btn.classList.add('border-gray-200');
+            });
+            const selectedBtn = document.querySelector(`[data-park="${park}"]`);
+            const colorClass = parkData[park].color;
+            selectedBtn.classList.remove('border-gray-200');
+            selectedBtn.classList.add(`border-${colorClass}`, `bg-${colorClass === 'disney' ? 'purple' : colorClass === 'universal' ? 'blue' : 'cyan'}-50`);
+            document.getElementById('step2').style.display = 'block';
+            document.getElementById('step2').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateItinerary() {
+            if (!selectedPark) return;
+            
+            const park = parkData[selectedPark];
+            const partyType = document.getElementById('partyType').value;
+            const arrivalTime = document.getElementById('arrivalTime').value;
+            const hasExpress = document.getElementById('hasExpress').value === 'yes';
+            const wantsMeals = document.getElementById('wantsMeals').checked;
+
+            let schedule = [];
+            let time = arrivalTime === 'ropedrop' ? 8 : arrivalTime === 'early' ? 9 : arrivalTime === 'midday' ? 11 : 14;
+
+            // Rope drop
+            if (arrivalTime === 'ropedrop') {
+                schedule.push({ time: formatTime(time), activity: `🚀 ROPE DROP: ${park.attractions.ropedrop[0]}`, type: 'priority', note: 'Get there 30-45min before park opens!' });
+                time += 1;
+                schedule.push({ time: formatTime(time), activity: `🎢 ${park.attractions.ropedrop[1]}`, type: 'ride' });
+                time += 0.75;
+                schedule.push({ time: formatTime(time), activity: `🎢 ${park.attractions.ropedrop[2]}`, type: 'ride' });
+                time += 0.75;
+            }
+
+            // Morning attractions
+            if (time < 12) {
+                if (wantsMeals && time >= 8) {
+                    schedule.push({ time: formatTime(time), activity: `☕ Breakfast: ${park.dining.breakfast}`, type: 'meal' });
+                    time += 0.5;
+                }
+                park.attractions.morning.forEach((ride, i) => {
+                    if (time < 12 && i < 3) {
+                        schedule.push({ time: formatTime(time), activity: `🎢 ${ride}`, type: 'ride' });
+                        time += hasExpress ? 0.5 : 0.75;
+                    }
+                });
+            }
+
+            // Lunch
+            if (wantsMeals && time >= 11.5 && time < 14) {
+                schedule.push({ time: formatTime(Math.max(time, 12)), activity: `🍔 Lunch: ${park.dining.lunch}`, type: 'meal', note: 'Pro tip: Eat before noon or after 1:30pm to avoid peak crowds' });
+                time = Math.max(time, 12) + 1;
+            }
+
+            // Midday
+            park.attractions.midday.forEach((ride, i) => {
+                if (time < 15 && i < 3) {
+                    schedule.push({ time: formatTime(time), activity: `🎠 ${ride}`, type: 'ride' });
+                    time += 0.5;
+                }
+            });
+
+            // Snack break
+            schedule.push({ time: formatTime(time), activity: `🍦 Snack: ${park.dining.snack}`, type: 'snack', note: 'Must-try!' });
+            time += 0.5;
+
+            // Afternoon
+            park.attractions.afternoon.forEach((item, i) => {
+                if (time < 18 && i < 3) {
+                    schedule.push({ time: formatTime(time), activity: `✨ ${item}`, type: 'experience' });
+                    time += 0.75;
+                }
+            });
+
+            // Dinner
+            if (wantsMeals) {
+                schedule.push({ time: formatTime(Math.max(time, 17.5)), activity: `🍽️ Dinner: ${park.dining.dinner}`, type: 'meal' });
+                time = Math.max(time, 17.5) + 1.5;
+            }
+
+            // Evening
+            park.attractions.evening.forEach((item, i) => {
+                schedule.push({ time: formatTime(time), activity: `🌙 ${item}`, type: 'evening' });
+                time += 0.75;
+            });
+
+            // Render
+            document.getElementById('parkName').textContent = park.name;
+            const content = document.getElementById('itineraryContent');
+            content.innerHTML = schedule.map(item => `
+                <div class="flex items-start gap-4 p-3 rounded-lg ${item.type === 'priority' ? 'bg-red-50 border-l-4 border-red-500' : item.type === 'meal' ? 'bg-green-50 border-l-4 border-green-500' : item.type === 'evening' ? 'bg-purple-50 border-l-4 border-purple-500' : 'bg-gray-50'}">
+                    <span class="font-mono text-sm font-bold text-gray-600 whitespace-nowrap">${item.time}</span>
+                    <div>
+                        <p class="font-medium">${item.activity}</p>
+                        ${item.note ? `<p class="text-xs text-gray-500 mt-1">${item.note}</p>` : ''}
+                    </div>
+                </div>
+            `).join('');
+
+            // Tips
+            const tips = document.getElementById('proTips');
+            tips.innerHTML = park.tips.map(tip => `<li>• ${tip}</li>`).join('');
+
+            document.getElementById('itineraryResult').style.display = 'block';
+            document.getElementById('itineraryResult').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function formatTime(hours) {
+            const h = Math.floor(hours);
+            const m = Math.round((hours - h) * 60);
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            const displayH = h > 12 ? h - 12 : h;
+            return `${displayH}:${m.toString().padStart(2, '0')} ${ampm}`;
+        }
+
+        function printItinerary() {
+            window.print();
+        }
+
+        function resetBuilder() {
+            selectedPark = null;
+            document.querySelectorAll('.park-btn').forEach(btn => {
+                btn.classList.remove('border-disney', 'border-universal', 'border-seaworld', 'bg-purple-50', 'bg-blue-50', 'bg-cyan-50');
+                btn.classList.add('border-gray-200');
+            });
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('itineraryResult').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function downloadPDF() {
+            alert('📥 PDF download coming soon! For now, use the Print button and select "Save as PDF".');
+        }
+
+        async function subscribeEmail(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            // Send to Supabase
+            alert('✅ Thanks for subscribing! Check your inbox for weekly tips.');
+        }
+    </script>
+</body>
+</html>

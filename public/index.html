@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
+        .pulse-glow { animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -22,7 +24,7 @@
             <div class="flex items-center gap-6">
                 <a href="/tools" class="text-gray-600 hover:text-purple-600 font-medium">Tools</a>
                 <a href="/current-deals" class="text-gray-600 hover:text-purple-600 font-medium">Deals</a>
-                <a href="/contact" class="text-gray-600 hover:text-purple-600 font-medium">Contact</a>
+                <a href="#deal-alerts" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm font-medium">Get Alerts</a>
             </div>
         </div>
     </nav>
@@ -34,7 +36,94 @@
             <p class="text-xl text-white/90 mb-8">Free tools and honest guides for Disney World, Universal, and SeaWorld</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/tools" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">Browse All Tools</a>
-                <a href="/first-timers" class="bg-white/20 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/30 transition">First Time? Start Here</a>
+                <a href="#deal-alerts" class="bg-white/20 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/30 transition">Get Deal Alerts</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEAL ALERT SECTION - WORKING VERSION -->
+    <section id="deal-alerts" class="py-16 bg-gradient-to-r from-green-600 to-green-700">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white mb-3">🔔 Never Miss a Disney Deal</h2>
+                <p class="text-white/90 text-lg">Get notified when Disney announces new hotel promotions</p>
+                <p class="text-white/70 text-sm mt-2">We monitor Disney's official site and email you when deals drop</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-xl">
+                <form id="dealAlertForm" onsubmit="submitDealAlert(event)" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Your Email *</label>
+                            <input type="email" id="alertEmail" required placeholder="you@example.com" 
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Target Price (per night)</label>
+                            <input type="number" id="alertPrice" placeholder="e.g., 200" 
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Resort (optional)</label>
+                            <select id="alertResort" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500">
+                                <option value="any">Any Disney Resort</option>
+                                <optgroup label="💜 Value Resorts ($130-250/night)">
+                                    <option value="all-star-movies">All-Star Movies</option>
+                                    <option value="all-star-music">All-Star Music</option>
+                                    <option value="all-star-sports">All-Star Sports</option>
+                                    <option value="pop-century">Pop Century</option>
+                                    <option value="art-of-animation">Art of Animation</option>
+                                </optgroup>
+                                <optgroup label="💛 Moderate Resorts ($250-400/night)">
+                                    <option value="caribbean-beach">Caribbean Beach</option>
+                                    <option value="coronado-springs">Coronado Springs</option>
+                                    <option value="port-orleans-riverside">Port Orleans Riverside</option>
+                                    <option value="port-orleans-french-quarter">Port Orleans French Quarter</option>
+                                    <option value="fort-wilderness-cabins">Fort Wilderness Cabins</option>
+                                </optgroup>
+                                <optgroup label="💎 Deluxe Resorts ($450-1200/night)">
+                                    <option value="grand-floridian">Grand Floridian</option>
+                                    <option value="polynesian-village">Polynesian Village</option>
+                                    <option value="contemporary">Contemporary</option>
+                                    <option value="wilderness-lodge">Wilderness Lodge</option>
+                                    <option value="animal-kingdom-lodge">Animal Kingdom Lodge</option>
+                                    <option value="yacht-club">Yacht Club</option>
+                                    <option value="beach-club">Beach Club</option>
+                                    <option value="boardwalk-inn">BoardWalk Inn</option>
+                                    <option value="riviera">Riviera</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Travel Dates (optional)</label>
+                            <input type="text" id="alertDates" placeholder="e.g., March 2026 or Any" 
+                                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="w-full bg-green-600 text-white font-bold py-4 rounded-xl hover:bg-green-700 transition pulse-glow flex items-center justify-center gap-2">
+                        <i class="fas fa-bell"></i>
+                        <span id="submitText">Get Deal Alerts (Free)</span>
+                    </button>
+                </form>
+                
+                <div id="alertSuccess" class="hidden mt-4 bg-green-100 text-green-800 p-4 rounded-lg text-center">
+                    <i class="fas fa-check-circle text-2xl mb-2"></i>
+                    <p class="font-semibold">You're all set!</p>
+                    <p class="text-sm">We'll email you when Disney announces deals matching your preferences.</p>
+                </div>
+                
+                <div id="alertError" class="hidden mt-4 bg-red-100 text-red-800 p-4 rounded-lg text-center">
+                    <p class="font-semibold">Something went wrong</p>
+                    <p class="text-sm" id="errorMessage">Please try again.</p>
+                </div>
+                
+                <p class="text-gray-500 text-xs mt-4 text-center">
+                    We only email when Disney announces new deals. No spam, unsubscribe anytime.
+                </p>
             </div>
         </div>
     </section>
@@ -76,10 +165,10 @@
                     <p class="text-gray-500 text-sm">Skip-the-line strategy explained</p>
                 </a>
                 
-                <a href="/money-saving" class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition group">
-                    <div class="text-4xl mb-4">💵</div>
-                    <h3 class="font-bold text-lg mb-2 group-hover:text-purple-600">Money Saving Tips</h3>
-                    <p class="text-gray-500 text-sm">50+ ways to save on your trip</p>
+                <a href="/hotel-comparison" class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition group">
+                    <div class="text-4xl mb-4">🏨</div>
+                    <h3 class="font-bold text-lg mb-2 group-hover:text-purple-600">Hotel Comparison</h3>
+                    <p class="text-gray-500 text-sm">Compare all Disney resort hotels</p>
                 </a>
             </div>
             
@@ -89,58 +178,57 @@
         </div>
     </section>
 
-    <!-- Why Free -->
+    <!-- Accurate Price Ranges Section -->
     <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-2xl font-bold mb-4">Why Are These Tools Free?</h2>
-            <p class="text-gray-600 mb-8">We believe everyone deserves access to good planning resources. We make money through affiliate partnerships with trusted ticket sellers and travel agents - not by charging you for basic tools.</p>
-            <div class="grid md:grid-cols-3 gap-6 text-left">
-                <div class="p-4">
-                    <div class="text-green-500 text-2xl mb-2">✓</div>
-                    <h3 class="font-bold mb-1">No Paywalls</h3>
-                    <p class="text-sm text-gray-500">All tools are 100% free. No subscription required.</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-green-500 text-2xl mb-2">✓</div>
-                    <h3 class="font-bold mb-1">Honest Information</h3>
-                    <p class="text-sm text-gray-500">We tell you what we know and what we don't.</p>
-                </div>
-                <div class="p-4">
-                    <div class="text-green-500 text-2xl mb-2">✓</div>
-                    <h3 class="font-bold mb-1">No Fake Data</h3>
-                    <p class="text-sm text-gray-500">We link to official sources when you need real-time info.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Current Deals Preview -->
-    <section class="py-16">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-2">Current Deals</h2>
-            <p class="text-gray-500 text-center mb-8">Verified promotions from official sources</p>
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-2">Disney Resort Price Guide</h2>
+            <p class="text-gray-600 text-center mb-8 text-sm">Typical price ranges (actual prices vary by date and availability)</p>
             
-            <div class="bg-white rounded-xl shadow-sm divide-y">
-                <div class="p-5 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded">DISNEY</span>
-                        <p class="font-medium mt-1">Up to 20% off resort hotels</p>
-                        <p class="text-sm text-gray-500">Through December 25, 2025</p>
-                    </div>
-                    <a href="https://disneyworld.disney.go.com/special-offers/" target="_blank" class="text-purple-600 text-sm hover:underline">View →</a>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-purple-50 rounded-xl p-6">
+                    <h4 class="font-bold text-purple-800 mb-4">💜 Value Resorts</h4>
+                    <p class="text-sm text-gray-600 mb-4">$130 - $250/night typical</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex justify-between"><span>All-Star Movies</span><span class="text-gray-500">$130-180</span></li>
+                        <li class="flex justify-between"><span>All-Star Music</span><span class="text-gray-500">$130-180</span></li>
+                        <li class="flex justify-between"><span>All-Star Sports</span><span class="text-gray-500">$130-180</span></li>
+                        <li class="flex justify-between"><span>Pop Century</span><span class="text-gray-500">$180-250</span></li>
+                        <li class="flex justify-between"><span>Art of Animation</span><span class="text-gray-500">$200-300</span></li>
+                    </ul>
                 </div>
-                <div class="p-5 flex justify-between items-center">
-                    <div>
-                        <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">UNIVERSAL</span>
-                        <p class="font-medium mt-1">Epic Universe now open</p>
-                        <p class="text-sm text-gray-500">Multi-day tickets include all 3 parks</p>
-                    </div>
-                    <a href="https://www.universalorlando.com/web/en/us/tickets-packages" target="_blank" class="text-purple-600 text-sm hover:underline">View →</a>
+                
+                <div class="bg-yellow-50 rounded-xl p-6">
+                    <h4 class="font-bold text-yellow-700 mb-4">💛 Moderate Resorts</h4>
+                    <p class="text-sm text-gray-600 mb-4">$250 - $400/night typical</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex justify-between"><span>Caribbean Beach</span><span class="text-gray-500">$250-350</span></li>
+                        <li class="flex justify-between"><span>Coronado Springs</span><span class="text-gray-500">$260-380</span></li>
+                        <li class="flex justify-between"><span>Port Orleans Riverside</span><span class="text-gray-500">$260-350</span></li>
+                        <li class="flex justify-between"><span>Port Orleans French Qt</span><span class="text-gray-500">$260-340</span></li>
+                        <li class="flex justify-between"><span>Fort Wilderness Cabins</span><span class="text-gray-500">$350-550</span></li>
+                    </ul>
+                </div>
+                
+                <div class="bg-blue-50 rounded-xl p-6">
+                    <h4 class="font-bold text-blue-700 mb-4">💎 Deluxe Resorts</h4>
+                    <p class="text-sm text-gray-600 mb-4">$450 - $1200/night typical</p>
+                    <ul class="text-sm space-y-2">
+                        <li class="flex justify-between"><span>Wilderness Lodge</span><span class="text-gray-500">$450-750</span></li>
+                        <li class="flex justify-between"><span>Animal Kingdom Lodge</span><span class="text-gray-500">$450-800</span></li>
+                        <li class="flex justify-between"><span>Contemporary</span><span class="text-gray-500">$500-900</span></li>
+                        <li class="flex justify-between"><span>Polynesian Village</span><span class="text-gray-500">$600-1000</span></li>
+                        <li class="flex justify-between"><span>Grand Floridian</span><span class="text-gray-500">$700-1200</span></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="text-center mt-6">
-                <a href="/current-deals" class="text-purple-600 font-medium hover:underline">See all current deals →</a>
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-6">
+                <p class="text-sm text-amber-800">
+                    <strong>⚠️ Important:</strong> These are typical price ranges based on historical data. 
+                    Actual prices change daily based on demand. Always check 
+                    <a href="https://disneyworld.disney.go.com/resorts/" target="_blank" class="underline">Disney.com</a> 
+                    for current rates.
+                </p>
             </div>
         </div>
     </section>
@@ -171,6 +259,7 @@
                     <h4 class="font-bold mb-4">Resources</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="/current-deals" class="hover:text-white">Current Deals</a></li>
+                        <li><a href="/hotel-comparison" class="hover:text-white">Hotel Comparison</a></li>
                         <li><a href="/faq" class="hover:text-white">FAQ</a></li>
                         <li><a href="/contact" class="hover:text-white">Contact Us</a></li>
                     </ul>
@@ -185,5 +274,65 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // ========== DEAL ALERT SUBMISSION - ACTUALLY CALLS THE API ==========
+        async function submitDealAlert(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const alertSuccess = document.getElementById('alertSuccess');
+            const alertError = document.getElementById('alertError');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            const email = document.getElementById('alertEmail').value.trim();
+            const resort = document.getElementById('alertResort').value;
+            const targetPrice = document.getElementById('alertPrice').value;
+            const travelDates = document.getElementById('alertDates').value.trim();
+            
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alertError.classList.remove('hidden');
+                errorMessage.textContent = 'Please enter a valid email address.';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitText.textContent = 'Saving...';
+            alertError.classList.add('hidden');
+            alertSuccess.classList.add('hidden');
+            
+            try {
+                const response = await fetch('/api/deal-alerts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email,
+                        resort,
+                        targetPrice: targetPrice || null,
+                        travelDates: travelDates || null,
+                        source: 'homepage-deal-tracker'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    alertSuccess.classList.remove('hidden');
+                    document.getElementById('dealAlertForm').reset();
+                    console.log('Deal alert created:', result);
+                } else {
+                    throw new Error(result.error || 'Failed to save alert');
+                }
+            } catch (error) {
+                console.error('Error saving deal alert:', error);
+                alertError.classList.remove('hidden');
+                errorMessage.textContent = error.message || 'Something went wrong. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Get Deal Alerts (Free)';
+            }
+        }
+    </script>
 </body>
 </html>

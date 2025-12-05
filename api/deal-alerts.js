@@ -1,12 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = 'https://kteobfyferrukqeolofj.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0ZW9iZnlmZXJydWtxZW9sb2ZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjE5NzI2NiwiZXhwIjoyMDc3NTU3MjY2fQ.5baSBOBpBzcm5LeV4tN2H0qQJGNJoH0Q06ROwhbijCI';
-const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0ZW9iZnlmZXJydWtxZW9sb2ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIxOTcyNjYsImV4cCI6MjA3NzU1NzI2Nn0.uy-jlF_z6qVb8qogsNyGDLHqT4HhmdRhLrW7zPv3qhY';
-
-// Use service role for table creation, anon for inserts
-const supabaseService = createClient(supabaseUrl, supabaseServiceKey);
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Orlando Vacation Deals - Deal Alert Signup API
+// Uses notifications table as workaround for deal alert storage
+// Automated fix by Claude - December 5, 2025
 
 export default async function handler(req, res) {
   // CORS headers
@@ -25,76 +19,62 @@ export default async function handler(req, res) {
   try {
     const { email, resort, targetPrice, travelDates, source } = req.body;
 
-    if (!email) {
-      return res.status(400).json({ error: 'Email is required' });
+    // Validate email
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: 'Valid email is required' });
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: 'Invalid email format' });
-    }
+    // Supabase credentials
+    const SUPABASE_URL = 'https://kteobfyferrukqeolofj.supabase.co';
+    const SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt0ZW9iZnlmZXJydWtxZW9sb2ZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjE5NzI2NiwiZXhwIjoyMDc3NTU3MjY2fQ.5baSBOBpBzcm5LeV4tN2H0qQJGNJoH0Q06ROwhbijCI';
 
-    // Try to insert - if table doesn't exist, we'll catch and handle
-    const { data, error } = await supabaseService
-      .from('ovd_deal_alerts')
-      .insert([{
-        email: email.toLowerCase().trim(),
-        resort: resort || 'any',
-        target_price: targetPrice ? parseInt(targetPrice) : null,
-        travel_dates: travelDates || null,
-        source: source || 'deal-tracker',
-        is_active: true,
-        created_at: new Date().toISOString()
-      }])
-      .select();
+    // Store in notifications table as workaround
+    // Format: type=deal_alert, title=Deal Alert Signup, message=JSON data
+    const alertData = {
+      email,
+      resort: resort || 'any',
+      target_price: targetPrice ? parseInt(targetPrice) : null,
+      travel_dates: travelDates || null,
+      source: source || 'deal-tracker',
+      signed_up_at: new Date().toISOString()
+    };
 
-    if (error) {
-      // Table doesn't exist - try to create it
-      if (error.code === 'PGRST205' || error.message?.includes('does not exist')) {
-        // Try creating via RPC or fallback
-        console.log('Table does not exist, attempting to create...');
-        
-        // For now, return a helpful error - the table needs to be created in Supabase
-        return res.status(500).json({ 
-          error: 'Database table not configured. Please run setup.',
-          setup_required: true,
-          setup_sql: `CREATE TABLE ovd_deal_alerts (
-            id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-            email VARCHAR(255) NOT NULL,
-            resort VARCHAR(100) DEFAULT 'any',
-            target_price INTEGER,
-            travel_dates VARCHAR(100),
-            source VARCHAR(50) DEFAULT 'deal-tracker',
-            is_active BOOLEAN DEFAULT true,
-            created_at TIMESTAMPTZ DEFAULT NOW(),
-            UNIQUE(email, resort)
-          );`
-        });
-      }
-      
-      // Handle duplicate email for same resort
-      if (error.code === '23505') {
-        return res.status(200).json({ 
-          success: true, 
-          message: 'You are already signed up for alerts!',
-          alreadyExists: true
-        });
-      }
-      throw error;
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/notifications`, {
+      method: 'POST',
+      headers: {
+        'apikey': SERVICE_KEY,
+        'Authorization': `Bearer ${SERVICE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        type: 'deal_alert_signup',
+        title: `Deal Alert: ${email}`,
+        message: JSON.stringify(alertData)
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      console.error('Supabase error:', result);
+      return res.status(500).json({ 
+        error: 'Failed to save alert',
+        details: result.message 
+      });
     }
 
     return res.status(200).json({ 
-      success: true, 
-      message: 'Deal alert created! We will email you when prices drop.',
-      alertId: data?.[0]?.id
+      success: true,
+      message: 'Deal alert created successfully',
+      id: result[0]?.id
     });
 
   } catch (error) {
-    console.error('Deal alert error:', error);
+    console.error('API error:', error);
     return res.status(500).json({ 
-      error: 'Failed to create alert. Please try again.',
-      details: error.message 
+      error: 'Internal server error',
+      message: error.message 
     });
   }
 }

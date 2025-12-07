@@ -11,37 +11,361 @@
         .hero-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); }
         .pulse-glow { animation: pulseGlow 2s infinite; }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); } }
+        
+        /* Mega Menu Styles */
+        .mega-menu { display: none; position: absolute; left: 0; right: 0; top: 100%; background: white; box-shadow: 0 10px 40px rgba(0,0,0,0.1); z-index: 100; }
+        .nav-item:hover .mega-menu { display: block; }
+        .mega-menu-enter { animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Search Styles */
+        .search-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+        .search-overlay.active { display: flex; }
+        .search-result:hover { background: #f3f4f6; }
+        
+        /* Javari Chat Widget */
+        .javari-widget { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
+        .javari-button { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #6366f1); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .javari-button:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5); }
+        .javari-chat { display: none; position: absolute; bottom: 80px; right: 0; width: 380px; height: 520px; background: white; border-radius: 16px; box-shadow: 0 10px 50px rgba(0,0,0,0.2); overflow: hidden; }
+        .javari-chat.active { display: flex; flex-direction: column; }
+        .javari-typing { display: flex; gap: 4px; padding: 8px; }
+        .javari-typing span { width: 8px; height: 8px; background: #8b5cf6; border-radius: 50%; animation: bounce 1.4s infinite; }
+        .javari-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .javari-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+        
+        /* Mobile Menu */
+        .mobile-menu { display: none; }
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            .mobile-menu.active { display: block; }
+            .javari-chat { width: calc(100vw - 32px); right: -8px; }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Clean Nav -->
-    <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2">
-                <span class="text-2xl">🏰</span>
-                <span class="font-bold text-xl text-gray-800">Orlando Vacation Deals</span>
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="/tools" class="text-gray-600 hover:text-purple-600 font-medium">Tools</a>
-                <a href="/current-deals" class="text-gray-600 hover:text-purple-600 font-medium">Deals</a>
-                <a href="#deal-alerts" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm font-medium">Get Alerts</a>
+    <!-- Enhanced Navigation with Mega Menus -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2">
+                    <span class="text-2xl">🏰</span>
+                    <span class="font-bold text-xl text-gray-800">Orlando Vacation Deals</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex items-center gap-1">
+                    <!-- Planning Tools Dropdown -->
+                    <div class="nav-item relative">
+                        <button class="px-4 py-2 text-gray-700 hover:text-purple-600 font-medium flex items-center gap-1">
+                            Planning Tools <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="mega-menu mega-menu-enter py-8">
+                            <div class="max-w-6xl mx-auto px-8 grid grid-cols-4 gap-8">
+                                <div>
+                                    <h3 class="font-bold text-purple-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-calculator"></i> Budget & Planning
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/budget-calculator" class="text-gray-600 hover:text-purple-600">💰 Budget Calculator</a></li>
+                                        <li><a href="/trip-planner" class="text-gray-600 hover:text-purple-600">📅 Trip Planner</a></li>
+                                        <li><a href="/countdown" class="text-gray-600 hover:text-purple-600">⏰ Vacation Countdown</a></li>
+                                        <li><a href="/savings-tracker" class="text-gray-600 hover:text-purple-600">🎯 Savings Tracker</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-purple-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-calendar"></i> Timing & Crowds
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/crowd-calendar" class="text-gray-600 hover:text-purple-600">📆 Crowd Calendar</a></li>
+                                        <li><a href="/best-times" class="text-gray-600 hover:text-purple-600">🌟 Best Times to Visit</a></li>
+                                        <li><a href="/weather-guide" class="text-gray-600 hover:text-purple-600">☀️ Weather Guide</a></li>
+                                        <li><a href="/events-calendar" class="text-gray-600 hover:text-purple-600">🎉 Special Events</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-purple-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-suitcase"></i> Packing & Prep
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/packing-list" class="text-gray-600 hover:text-purple-600">🧳 Packing List Generator</a></li>
+                                        <li><a href="/what-to-wear" class="text-gray-600 hover:text-purple-600">👕 What to Wear</a></li>
+                                        <li><a href="/first-timers" class="text-gray-600 hover:text-purple-600">🆕 First Timer Checklist</a></li>
+                                        <li><a href="/touring-plans" class="text-gray-600 hover:text-purple-600">🗺️ Touring Plans</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-purple-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-child"></i> Family Tools
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/height-checker" class="text-gray-600 hover:text-purple-600">📏 Height Checker</a></li>
+                                        <li><a href="/stroller-guide" class="text-gray-600 hover:text-purple-600">👶 Stroller Guide</a></li>
+                                        <li><a href="/kids-activities" class="text-gray-600 hover:text-purple-600">🎨 Kids Activities</a></li>
+                                        <li><a href="/character-dining" class="text-gray-600 hover:text-purple-600">🐭 Character Dining</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Parks Dropdown -->
+                    <div class="nav-item relative">
+                        <button class="px-4 py-2 text-gray-700 hover:text-purple-600 font-medium flex items-center gap-1">
+                            Parks <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="mega-menu mega-menu-enter py-8">
+                            <div class="max-w-6xl mx-auto px-8 grid grid-cols-3 gap-8">
+                                <div>
+                                    <h3 class="font-bold text-blue-600 mb-4 flex items-center gap-2">
+                                        <span class="text-xl">🏰</span> Walt Disney World
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/parks/magic-kingdom" class="text-gray-600 hover:text-blue-600">Magic Kingdom</a></li>
+                                        <li><a href="/parks/epcot" class="text-gray-600 hover:text-blue-600">EPCOT</a></li>
+                                        <li><a href="/parks/hollywood-studios" class="text-gray-600 hover:text-blue-600">Hollywood Studios</a></li>
+                                        <li><a href="/parks/animal-kingdom" class="text-gray-600 hover:text-blue-600">Animal Kingdom</a></li>
+                                        <li><a href="/disney-springs" class="text-gray-600 hover:text-blue-600">Disney Springs</a></li>
+                                        <li><a href="/water-parks" class="text-gray-600 hover:text-blue-600">Water Parks</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-orange-600 mb-4 flex items-center gap-2">
+                                        <span class="text-xl">🎢</span> Universal Orlando
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/parks/universal-studios" class="text-gray-600 hover:text-orange-600">Universal Studios</a></li>
+                                        <li><a href="/parks/islands-of-adventure" class="text-gray-600 hover:text-orange-600">Islands of Adventure</a></li>
+                                        <li><a href="/parks/volcano-bay" class="text-gray-600 hover:text-orange-600">Volcano Bay</a></li>
+                                        <li><a href="/parks/epic-universe" class="text-gray-600 hover:text-orange-600">Epic Universe (2025)</a></li>
+                                        <li><a href="/citywalk" class="text-gray-600 hover:text-orange-600">CityWalk</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-cyan-600 mb-4 flex items-center gap-2">
+                                        <span class="text-xl">🐬</span> More Parks
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/parks/seaworld" class="text-gray-600 hover:text-cyan-600">SeaWorld Orlando</a></li>
+                                        <li><a href="/parks/busch-gardens" class="text-gray-600 hover:text-cyan-600">Busch Gardens Tampa</a></li>
+                                        <li><a href="/parks/legoland" class="text-gray-600 hover:text-cyan-600">LEGOLAND Florida</a></li>
+                                        <li><a href="/parks/discovery-cove" class="text-gray-600 hover:text-cyan-600">Discovery Cove</a></li>
+                                        <li><a href="/parks/aquatica" class="text-gray-600 hover:text-cyan-600">Aquatica</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hotels & Deals Dropdown -->
+                    <div class="nav-item relative">
+                        <button class="px-4 py-2 text-gray-700 hover:text-purple-600 font-medium flex items-center gap-1">
+                            Hotels & Deals <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="mega-menu mega-menu-enter py-8">
+                            <div class="max-w-6xl mx-auto px-8 grid grid-cols-3 gap-8">
+                                <div>
+                                    <h3 class="font-bold text-purple-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-hotel"></i> Disney Resorts
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/hotels/disney-value" class="text-gray-600 hover:text-purple-600">💜 Value Resorts</a></li>
+                                        <li><a href="/hotels/disney-moderate" class="text-gray-600 hover:text-purple-600">💛 Moderate Resorts</a></li>
+                                        <li><a href="/hotels/disney-deluxe" class="text-gray-600 hover:text-purple-600">💎 Deluxe Resorts</a></li>
+                                        <li><a href="/hotel-comparison" class="text-gray-600 hover:text-purple-600">📊 Resort Comparison</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-green-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-tags"></i> Deals & Savings
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/current-deals" class="text-gray-600 hover:text-green-600">🔥 Current Deals</a></li>
+                                        <li><a href="#deal-alerts" class="text-gray-600 hover:text-green-600">🔔 Deal Alerts</a></li>
+                                        <li><a href="/discount-tickets" class="text-gray-600 hover:text-green-600">🎟️ Discount Tickets</a></li>
+                                        <li><a href="/money-saving" class="text-gray-600 hover:text-green-600">💵 Money-Saving Tips</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-orange-600 mb-4 flex items-center gap-2">
+                                        <i class="fas fa-bed"></i> Off-Site Options
+                                    </h3>
+                                    <ul class="space-y-3">
+                                        <li><a href="/hotels/universal-resorts" class="text-gray-600 hover:text-orange-600">Universal Hotels</a></li>
+                                        <li><a href="/hotels/offsite-disney" class="text-gray-600 hover:text-orange-600">Near Disney World</a></li>
+                                        <li><a href="/hotels/vacation-homes" class="text-gray-600 hover:text-orange-600">Vacation Rentals</a></li>
+                                        <li><a href="/hotels/budget-stays" class="text-gray-600 hover:text-orange-600">Budget Options</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Guides Link -->
+                    <a href="/guides" class="px-4 py-2 text-gray-700 hover:text-purple-600 font-medium">Guides</a>
+                </div>
+                
+                <!-- Search & CTA -->
+                <div class="flex items-center gap-4">
+                    <button onclick="openSearch()" class="text-gray-500 hover:text-purple-600 p-2" aria-label="Search">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <a href="#deal-alerts" class="hidden sm:block bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 text-sm font-medium">
+                        Get Deal Alerts
+                    </a>
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="mobile-menu-btn md:hidden text-gray-700 p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu bg-white border-t">
+            <div class="px-4 py-4 space-y-4">
+                <a href="/tools" class="block text-gray-700 font-medium">Planning Tools</a>
+                <a href="/parks" class="block text-gray-700 font-medium">Parks</a>
+                <a href="/hotels" class="block text-gray-700 font-medium">Hotels & Deals</a>
+                <a href="/guides" class="block text-gray-700 font-medium">Guides</a>
+                <a href="#deal-alerts" class="block bg-purple-600 text-white px-4 py-2 rounded-lg text-center font-medium">Get Deal Alerts</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay items-center justify-center p-4" onclick="closeSearch(event)">
+        <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl" onclick="event.stopPropagation()">
+            <div class="p-4 border-b">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-search text-gray-400"></i>
+                    <input type="text" id="searchInput" placeholder="Search tools, guides, parks, hotels..." 
+                        class="flex-1 text-lg outline-none" oninput="handleSearch(this.value)" autofocus>
+                    <button onclick="closeSearch()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="searchResults" class="max-h-96 overflow-y-auto">
+                <div class="p-4 text-gray-500 text-center">Start typing to search...</div>
+            </div>
+            <div class="p-3 bg-gray-50 rounded-b-2xl border-t text-xs text-gray-500 flex items-center justify-between">
+                <span><kbd class="bg-gray-200 px-2 py-1 rounded">↵</kbd> to select</span>
+                <span><kbd class="bg-gray-200 px-2 py-1 rounded">ESC</kbd> to close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero with Search -->
     <section class="hero-gradient text-white py-20">
         <div class="max-w-4xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Plan Your Orlando Vacation</h1>
-            <p class="text-xl text-white/90 mb-8">Free tools and honest guides for Disney World, Universal, and SeaWorld</p>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Plan Your Perfect Orlando Vacation</h1>
+            <p class="text-xl text-white/90 mb-8">Free tools, honest guides, and AI-powered planning for Disney, Universal, and more</p>
+            
+            <!-- Hero Search Bar -->
+            <div class="max-w-xl mx-auto mb-8">
+                <button onclick="openSearch()" class="w-full bg-white/20 backdrop-blur-sm text-left text-white/80 px-6 py-4 rounded-xl hover:bg-white/30 transition flex items-center gap-3">
+                    <i class="fas fa-search"></i>
+                    <span>Search for tools, guides, parks, or hotels...</span>
+                    <span class="ml-auto text-sm bg-white/20 px-2 py-1 rounded">⌘K</span>
+                </button>
+            </div>
+            
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/tools" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">Browse All Tools</a>
-                <a href="#deal-alerts" class="bg-white/20 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/30 transition">Get Deal Alerts</a>
+                <a href="/tools" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">
+                    <i class="fas fa-tools mr-2"></i>Browse All Tools
+                </a>
+                <button onclick="openJavariChat()" class="bg-white/20 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/30 transition">
+                    <i class="fas fa-robot mr-2"></i>Ask Javari AI
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- DEAL ALERT SECTION - WORKING VERSION -->
+    <!-- Quick Access Bar -->
+    <section class="bg-white border-b py-4">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-center gap-4 text-sm">
+                <span class="text-gray-500">Popular:</span>
+                <a href="/crowd-calendar" class="text-purple-600 hover:underline">📆 Crowd Calendar</a>
+                <a href="/budget-calculator" class="text-purple-600 hover:underline">💰 Budget Calculator</a>
+                <a href="/current-deals" class="text-purple-600 hover:underline">🔥 Current Deals</a>
+                <a href="/height-checker" class="text-purple-600 hover:underline">📏 Height Checker</a>
+                <a href="/lightning-lane-guide" class="text-purple-600 hover:underline">⚡ Lightning Lane</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ask Javari Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-indigo-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        <i class="fas fa-sparkles"></i> AI-Powered Planning
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4">Meet Javari, Your Orlando Expert</h2>
+                    <p class="text-gray-600 mb-6">
+                        Javari is an AI assistant trained on everything Orlando—Disney tips, Universal secrets, 
+                        budget tricks, and insider knowledge. Ask her anything about planning your perfect vacation.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span class="text-gray-700">"What's the best time to ride Flight of Passage?"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span class="text-gray-700">"How much should I budget for a family of 4?"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span class="text-gray-700">"Is Lightning Lane worth it in January?"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-purple-600 mt-1"><i class="fas fa-check-circle"></i></span>
+                            <span class="text-gray-700">"Which resort is best for toddlers?"</span>
+                        </li>
+                    </ul>
+                    <button onclick="openJavariChat()" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 transition flex items-center gap-2">
+                        <i class="fas fa-comments"></i> Start Chatting with Javari
+                    </button>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-xl p-6 border">
+                        <div class="flex items-center gap-3 mb-4 pb-4 border-b">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center">
+                                <span class="text-white text-lg">✨</span>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-800">Javari AI</div>
+                                <div class="text-xs text-green-500 flex items-center gap-1">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full"></span> Online
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 text-gray-700 text-sm">
+                                Hi! 👋 I'm Javari, your Orlando vacation expert. I can help you plan the perfect trip—from choosing the best parks to finding hidden deals. What would you like to know?
+                            </div>
+                            <div class="bg-purple-600 text-white rounded-2xl rounded-tr-none p-4 text-sm ml-8">
+                                What's the best Disney resort for a romantic trip?
+                            </div>
+                            <div class="bg-gray-100 rounded-2xl rounded-tl-none p-4 text-gray-700 text-sm">
+                                For a romantic Disney trip, I'd recommend the <strong>Grand Floridian</strong> or <strong>Polynesian Village</strong>! Both have beautiful theming, great dining, and easy monorail access to Magic Kingdom for fireworks...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEAL ALERT SECTION -->
     <section id="deal-alerts" class="py-16 bg-gradient-to-r from-green-600 to-green-700">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-10">
@@ -266,7 +590,11 @@
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">About</h4>
-                    <p class="text-sm text-gray-400">Free Orlando vacation planning tools. We're not affiliated with Disney, Universal, or SeaWorld.</p>
+                    <p class="text-sm text-gray-400 mb-4">Free Orlando vacation planning tools powered by Javari AI. We're not affiliated with Disney, Universal, or SeaWorld.</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-purple-400">Powered by</span>
+                        <a href="https://craudiovizai.com" class="text-white font-bold hover:text-purple-400">CR AudioViz AI</a>
+                    </div>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
@@ -275,8 +603,238 @@
         </div>
     </footer>
 
+    <!-- Javari AI Chat Widget -->
+    <div class="javari-widget">
+        <div id="javariChat" class="javari-chat">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                        <span class="text-xl">✨</span>
+                    </div>
+                    <div>
+                        <div class="font-bold">Javari AI</div>
+                        <div class="text-xs text-white/80">Orlando Planning Expert</div>
+                    </div>
+                </div>
+                <button onclick="closeJavariChat()" class="text-white/80 hover:text-white">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            <div id="javariMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                        <span>✨</span>
+                    </div>
+                    <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm max-w-[80%]">
+                        <p class="text-sm text-gray-700">Hi! 👋 I'm Javari, your Orlando vacation expert. Ask me anything about Disney World, Universal, planning tips, or finding deals!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t bg-white">
+                <form id="javariForm" onsubmit="sendJavariMessage(event)" class="flex gap-2">
+                    <input type="text" id="javariInput" placeholder="Ask about Disney, Universal, tips..." 
+                        class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                    <button type="submit" class="bg-purple-600 text-white w-10 h-10 rounded-full hover:bg-purple-700 transition flex items-center justify-center">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <button onclick="toggleJavariChat()" class="javari-button" id="javariBtn">
+            <span class="text-white text-2xl" id="javariIcon">✨</span>
+        </button>
+    </div>
+
     <script>
-        // ========== DEAL ALERT SUBMISSION - ACTUALLY CALLS THE API ==========
+        // ========== SEARCH FUNCTIONALITY ==========
+        const searchData = [
+            { title: 'Crowd Calendar', desc: 'See busy vs slow days', url: '/crowd-calendar', icon: '📆', category: 'Tools' },
+            { title: 'Budget Calculator', desc: 'Estimate your trip cost', url: '/budget-calculator', icon: '💰', category: 'Tools' },
+            { title: 'Packing List Generator', desc: 'Custom checklist', url: '/packing-list', icon: '🧳', category: 'Tools' },
+            { title: 'Height Checker', desc: 'Ride requirements', url: '/height-checker', icon: '📏', category: 'Tools' },
+            { title: 'Trip Planner', desc: 'Build your itinerary', url: '/trip-planner', icon: '📅', category: 'Tools' },
+            { title: 'Magic Kingdom', desc: 'Park guide & tips', url: '/parks/magic-kingdom', icon: '🏰', category: 'Parks' },
+            { title: 'EPCOT', desc: 'Park guide & tips', url: '/parks/epcot', icon: '🌐', category: 'Parks' },
+            { title: 'Hollywood Studios', desc: 'Park guide & tips', url: '/parks/hollywood-studios', icon: '🎬', category: 'Parks' },
+            { title: 'Animal Kingdom', desc: 'Park guide & tips', url: '/parks/animal-kingdom', icon: '🦁', category: 'Parks' },
+            { title: 'Universal Studios', desc: 'Park guide & tips', url: '/parks/universal-studios', icon: '🎢', category: 'Parks' },
+            { title: 'Islands of Adventure', desc: 'Park guide & tips', url: '/parks/islands-of-adventure', icon: '🏝️', category: 'Parks' },
+            { title: 'Current Deals', desc: 'Latest discounts', url: '/current-deals', icon: '🔥', category: 'Deals' },
+            { title: 'Deal Alerts', desc: 'Get notified', url: '#deal-alerts', icon: '🔔', category: 'Deals' },
+            { title: 'Value Resorts', desc: 'Budget-friendly stays', url: '/hotels/disney-value', icon: '💜', category: 'Hotels' },
+            { title: 'Moderate Resorts', desc: 'Mid-range options', url: '/hotels/disney-moderate', icon: '💛', category: 'Hotels' },
+            { title: 'Deluxe Resorts', desc: 'Luxury stays', url: '/hotels/disney-deluxe', icon: '💎', category: 'Hotels' },
+            { title: 'Lightning Lane Guide', desc: 'Skip-the-line tips', url: '/lightning-lane-guide', icon: '⚡', category: 'Guides' },
+            { title: 'First Timer Guide', desc: 'Essential tips', url: '/first-timers', icon: '🆕', category: 'Guides' },
+            { title: 'Dining Guide', desc: 'Restaurant tips', url: '/dining-guide', icon: '🍽️', category: 'Guides' },
+            { title: 'Money Saving Tips', desc: 'Budget tricks', url: '/money-saving', icon: '💵', category: 'Guides' },
+            { title: 'Grand Floridian', desc: 'Luxury monorail resort', url: '/hotels/grand-floridian', icon: '🏛️', category: 'Hotels' },
+            { title: 'Polynesian Village', desc: 'Tropical paradise', url: '/hotels/polynesian', icon: '🌺', category: 'Hotels' },
+            { title: 'Port Orleans', desc: 'Southern charm', url: '/hotels/port-orleans', icon: '🎺', category: 'Hotels' },
+        ];
+
+        function openSearch() {
+            document.getElementById('searchOverlay').classList.add('active');
+            document.getElementById('searchInput').focus();
+        }
+
+        function closeSearch(e) {
+            if (!e || e.target.id === 'searchOverlay') {
+                document.getElementById('searchOverlay').classList.remove('active');
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchResults').innerHTML = '<div class="p-4 text-gray-500 text-center">Start typing to search...</div>';
+            }
+        }
+
+        function handleSearch(query) {
+            const resultsDiv = document.getElementById('searchResults');
+            if (!query.trim()) {
+                resultsDiv.innerHTML = '<div class="p-4 text-gray-500 text-center">Start typing to search...</div>';
+                return;
+            }
+            
+            const results = searchData.filter(item => 
+                item.title.toLowerCase().includes(query.toLowerCase()) ||
+                item.desc.toLowerCase().includes(query.toLowerCase()) ||
+                item.category.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div class="p-4 text-center">
+                        <p class="text-gray-500 mb-2">No results found for "${query}"</p>
+                        <button onclick="openJavariChat(); closeSearch();" class="text-purple-600 hover:underline">
+                            Ask Javari AI instead →
+                        </button>
+                    </div>`;
+                return;
+            }
+            
+            resultsDiv.innerHTML = results.map(item => `
+                <a href="${item.url}" class="search-result flex items-center gap-4 p-3 hover:bg-gray-50 border-b">
+                    <span class="text-2xl">${item.icon}</span>
+                    <div class="flex-1">
+                        <div class="font-medium text-gray-800">${item.title}</div>
+                        <div class="text-sm text-gray-500">${item.desc}</div>
+                    </div>
+                    <span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded">${item.category}</span>
+                </a>
+            `).join('');
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearch();
+            }
+            if (e.key === 'Escape') {
+                closeSearch();
+                closeJavariChat();
+            }
+        });
+
+        // ========== MOBILE MENU ==========
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        // ========== JAVARI CHAT ==========
+        let javariChatOpen = false;
+
+        function toggleJavariChat() {
+            javariChatOpen = !javariChatOpen;
+            document.getElementById('javariChat').classList.toggle('active', javariChatOpen);
+            document.getElementById('javariIcon').textContent = javariChatOpen ? '✕' : '✨';
+        }
+
+        function openJavariChat() {
+            javariChatOpen = true;
+            document.getElementById('javariChat').classList.add('active');
+            document.getElementById('javariIcon').textContent = '✕';
+        }
+
+        function closeJavariChat() {
+            javariChatOpen = false;
+            document.getElementById('javariChat').classList.remove('active');
+            document.getElementById('javariIcon').textContent = '✨';
+        }
+
+        async function sendJavariMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('javariInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            const messagesDiv = document.getElementById('javariMessages');
+            
+            // Add user message
+            messagesDiv.innerHTML += `
+                <div class="flex gap-3 justify-end">
+                    <div class="bg-purple-600 text-white rounded-2xl rounded-tr-none p-3 shadow-sm max-w-[80%]">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                </div>`;
+            
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            // Add typing indicator
+            const typingId = 'typing-' + Date.now();
+            messagesDiv.innerHTML += `
+                <div id="${typingId}" class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                        <span>✨</span>
+                    </div>
+                    <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm">
+                        <div class="javari-typing">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            try {
+                // Call Javari API
+                const response = await fetch('/api/javari-chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, context: 'orlando-planning' })
+                });
+                
+                const data = await response.json();
+                
+                // Remove typing indicator
+                document.getElementById(typingId)?.remove();
+                
+                // Add Javari response
+                messagesDiv.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                            <span>✨</span>
+                        </div>
+                        <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm max-w-[80%]">
+                            <p class="text-sm text-gray-700">${data.response || data.message || 'I apologize, I had trouble understanding that. Could you try rephrasing?'}</p>
+                        </div>
+                    </div>`;
+                
+            } catch (error) {
+                document.getElementById(typingId)?.remove();
+                messagesDiv.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                            <span>✨</span>
+                        </div>
+                        <div class="bg-white rounded-2xl rounded-tl-none p-3 shadow-sm max-w-[80%]">
+                            <p class="text-sm text-gray-700">I'm having trouble connecting right now. Please try again in a moment, or check out our <a href="/guides" class="text-purple-600 underline">guides</a> for helpful info!</p>
+                        </div>
+                    </div>`;
+            }
+            
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // ========== DEAL ALERT SUBMISSION ==========
         async function submitDealAlert(e) {
             e.preventDefault();
             
@@ -320,12 +878,10 @@
                 if (response.ok && result.success) {
                     alertSuccess.classList.remove('hidden');
                     document.getElementById('dealAlertForm').reset();
-                    console.log('Deal alert created:', result);
                 } else {
                     throw new Error(result.error || 'Failed to save alert');
                 }
             } catch (error) {
-                console.error('Error saving deal alert:', error);
                 alertError.classList.remove('hidden');
                 errorMessage.textContent = error.message || 'Something went wrong. Please try again.';
             } finally {
